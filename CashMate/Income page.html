@@ -1,0 +1,219 @@
+<html lang="en">
+  <head>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> CASHMATE | Ang iyong Cash-ama sa Pag-asenso</title> 
+	<link rel="icon" href="Images/CASHMATE.png" type="image/x-icon" width="50px" height="50px">
+	<link type= "text/css" rel="stylesheet" href="CashMate.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  </head>
+  <body>
+	<nav class="navbar navbar-expand-lg "id="NavBar">
+		<div class="container-fluid" id="cf">
+			<div class="row" id="head">
+				<div class="col-md-3">
+					<div class="navbar-preheader">
+						<h1 class="text-fluid"><img class="img-fluid" src="Images/CASHMATE.png"  alt="CashMate logo"><b> CASHMATE</b> </h1>
+					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#drop-img">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>                        
+					  </button> 
+					</div>
+				</div>
+				<div class="col-md-9 collapse navbar-collapse navbar-right" id="drop-img">
+					<ul class="nav navbar-nav "  >
+						<li ><a href="Dashboard.html" class="link">Dashboard</a></li>
+						<li><a href="Income page.html" class="link">Income</a></li>
+						<li><a href="Spendings.html" class="link">Spendings</a></li>
+						<li ><a href="Cards.html">Cards</a></li>
+						<li ><a href="Planner.html" class="link">Planner</a></li> 
+						<li ><a href="" class="link"><img src="Images/question.png"></a></li> 
+						<li ><a href="" class="link"><img src="Images/settings.png"></a></li> 
+						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
+						  <ul class="dropdown-menu" style="background-color:rgb(140,195,126);">
+							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
+							<p style="margin-left:60;margin-right:60;">Username</p>
+							<p >Username@example.com</p>
+							<p style="margin-left:60;margin-right:60;" ><a href="#" onclick="signOut()">Sign-out</a></p>
+						  </ul>
+						</li> 
+					 </ul>
+					 
+				</div>
+		</div>
+	</nav>
+	<script>
+    // JavaScript for handling sign-out
+    function signOut() {
+      // You can add additional logic here, such as clearing user session
+      alert('Signing out...');
+    }
+  </script>
+	<div class="container-fluid">
+		<div class="row" id="username-greetings"> 
+			<h1>Manage The Money Coming In.</h1> 
+		</div>
+		<div class="container " style="margin-top:-25px; margin-bottom:20px;">
+			<div class="col-md-7 Income" style="margin-bottom:10px;">
+				<div class="row">
+					<div class="col-md-2">
+						<h1>Income</h1>
+					</div>
+					<div class="col-md-1">
+						<button id="openPopupBtn"><img class="s2--add-button" src="Images/add-button.png" alt="Open Form"></button>
+					</div>
+				</div>
+				<div class="row section2--rect" style="margin:10px;"> 
+					<div class="col-md-1 s2--income-img" >
+						<img src="Images/income-bag.png" alt="income-bag">
+					</div>
+					<div class="col-md-10">
+						<div class="col-md-9 text-left">
+							<p class="s2--desc-title">Accenture</p>
+							<p class="s2--desc-categ">Employment</p>
+						</div>
+						<div class="col-md-3 text-left">
+							<p class="s2--desc-date">October 30
+							<p class="s2--desc-amount">P50,000
+						</div>
+
+					</div>
+					 
+				</div>
+				<div class="row section2--rect " style="margin:10px;"> 
+					<div class="col-md-1 s2--income-img" >
+						<img class="s2--income-img" src="Images/income-hand.png" alt="income-bag">
+					</div>
+					<div class="col-md-10">
+						<div class="col-md-9 text-left">
+							<p class="s2--desc-title">Beauty Havens</p>
+							<p class="s2--desc-categ">Bussiness</p>
+						</div>
+						<div class="col-md-3 text-left">
+							<p class="s2--desc-date">October 22</p>
+							<p class="s2--desc-amount">P40,000</p>
+						</div>
+					</div>
+				</div>
+				<div class="row section2--rect " style="margin:10px;"> 
+					<div class="col-md-1 s2--income-img" >
+						<img class="s2--income-img" src="Images/income-bag.png" alt="income-bag">
+					</div>
+					<div class="col-md-10">
+						<div class="col-md-9 text-left">
+							<p class="s2--desc-title">Accenture</p>
+							<p class="s2--desc-categ">Employment</p>
+						</div>
+						<div class="col-md-3 text-left">
+							<p class="s2--desc-date">October 15</p>
+						<p class="s2--desc-amount">P50,000</p>
+						</div>
+					</div>
+				</div>
+				<div class="row section2--rect " style="margin:10px;"> 
+					<div class="col-md-1 s2--income-img" >
+						<img class="s2--income-img" src="Images/income-hand.png" alt="income-bag">
+					</div>
+					<div class="col-md-10">
+						<div class="col-md-9 text-left">
+							<p class="s2--desc-title">Beauty Havens</p>
+							<p class="s2--desc-categ">Bussiness</p>
+						</div>
+						<div class="col-md-3 text-left">
+							<p class="s2--desc-date">October 07</p>
+							<p class="s2--desc-amount">P32,000</p>
+						</div>
+					</div>
+				</div>
+				<div class="row section2--rect " style="margin:10px;">  
+					<div class="col-md-1 s2--income-img" >
+						<img class="s2--income-img" src="Images/income-bag.png" alt="income-bag">
+					</div>
+					<div class="col-md-10">
+						<div class="col-md-9 text-left">
+							<p class="s2--desc-title">Others</p>
+							<p class="s2--desc-categ">Side Hustle</p>
+						</div>
+						<div class="col-md-3 text-left">
+							<p class="s2--desc-date">September 30</p>
+							<p class="s2--desc-amount">P50,000</p>
+						</div>
+					</div>
+			</div>
+			</div>
+			<div class="col-md-4 Computed-Income text-center" style="margin-left:50px;">
+				<h1>Computed Income</h1> 
+				<div class="section3 text-center">
+					<h1>P 172,000</h1>
+					<p >Updated approximately<br>every 7 days.<br>Record shows only the past<br>4 weeks.</p>
+					<button>Deposit to Planner</button>
+				</div>
+			</div>
+			
+		</div>
+		<div id="popupForm" class="popup">
+            <form class="form-container">
+              <h3>New Income</h3>
+                <label for="source">Income Source:</label><br>
+                <input type="text" placeholder="Enter Company/Business Name" name="source" required><br>
+    
+                <label for="category">Income Category:</label><br>
+                <input type="category" placeholder="Employment, Business, Etc." name="category" required><br>
+
+                <label for="date">Date:</label><br>
+                <input type="date" placeholder="January 12" name="date" required><br>
+
+                <label for="amount">Amount:</label><br>
+                <input type="number" placeholder="50000" name="amount" required><br>
+    
+                <button type="submit" class="btn-submit">Submit</button>
+                <button type="button" class="btn-cancel" id="closePopupBtn" onclick="closeForm()">Close</button>
+            </form>
+        </div>        
+	</div>
+	<script src="income-page-js.js"></script>
+  </body>
+    <footer >
+	<div class="container-fluid">
+		<div class="row" id="footer">
+			<div class="col-md-8">
+				<div class="footer-clmn1">
+				<h1>CashMate</h1>
+				<p>tagline</p>
+			</div>
+			</div>
+			<div class="col-md-4">
+				<div class="footer-clmn2">
+				<p> STAY CONNECTED </p>
+				<a href="#"><i class="fa fa-facebook fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-twitter fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-linkedin fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-youtube fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-envelope fa-2x" style="color: white"></i></a>
+			</div>
+		</div>
+	</div>
+	<div class="row" id="footer-b">
+		<div class="col-md-6">
+			<div class="footer-2clmn1">
+				<p> Copyright 2023 © CashMate. All rights reserved.</p>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="footer-2clmn2">
+				<p><a href="#">Terms of Use </a>|<a href="Privacy-Policy.html"> Privacy Policy </a>|<a href="#"> Site Map </a>|</p>
+			</div>
+		</div>
+	</div>
+  </footer>
+  </html>

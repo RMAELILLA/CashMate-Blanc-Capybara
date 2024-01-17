@@ -1,0 +1,175 @@
+<html lang="en">
+  <head>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> CASHMATE | Ang iyong Cash-ama sa Pag-asenso</title> 
+	<link rel="icon" href="Images/CASHMATE.png" type="image/x-icon" width="50px" height="50px">
+	<link type= "text/css" rel="stylesheet" href="CashMate.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+		<nav class="navbar navbar-expand-lg "id="NavBar">
+		<div class="container-fluid" id="cf">
+			<div class="row" id="head">
+				<div class="col-md-3">
+					<div class="navbar-preheader">
+						<h1 class="text-fluid"><img class="img-fluid" src="Images/CASHMATE.png"  alt="CashMate logo"><b> CASHMATE</b> </h1>
+					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#drop-img">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>                        
+					  </button> 
+					</div>
+				</div>
+				<div class="col-md-9 collapse navbar-collapse navbar-right" id="drop-img">
+					<ul class="nav navbar-nav "  >
+						<li ><a href="Dashboard.html" class="link">Dashboard</a></li>
+						<li><a href="Income page.html" class="link">Income</a></li>
+						<li><a href="Spendings.html" class="link">Spendings</a></li>
+						<li ><a href="Cards.html">Cards</a></li>
+						<li ><a href="Planner.html" class="link">Planner</a></li> 
+						<li ><a href="" class="link"><img src="Images/question.png"></a></li> 
+						<li ><a href="" class="link"><img src="Images/settings.png"></a></li> 
+						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
+						  <ul class="dropdown-menu" style="background-color:rgb(140,195,126);">
+							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
+							<p style="margin-left:60;margin-right:60;">Username</p>
+							<p >Username@example.com</p>
+							<p style="margin-left:60;margin-right:60;" ><a href="#" onclick="signOut()">Sign-out</a></p>
+						  </ul>
+						</li> 
+					 </ul>
+					 
+				</div>
+		</div>
+	</nav>
+	<script>
+    // JavaScript for handling sign-out
+    function signOut() {
+      // You can add additional logic here, such as clearing user session
+      alert('Signing out...');
+    }
+  </script>
+	<div class="container-fluid">
+		<div class="row" id="Planner"> 
+			<h1>Save for the Future!</h1> 
+			<div class="col-md-12">
+				<div class="planner-nav">
+					<ul>
+						<li><a href="#" onclick="showRetirement()">Retirement</a></li>
+						<li><a href="#">Vehicle</a></li>
+						<li><a href="#">House & Lot</a></li>
+						<li><a href="#">+ add new </a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container" style="margin-bottom:20px;" >
+		<div class="col-md-4 retirement">
+			 <h1> <img src="Images/retirement-icon.jpg" alt="Retirement Icon">Retirement</h1>
+			 <p>P2,000,000 &nbsp;&nbsp;&nbsp;&nbsp;|<b>Target:P30,000,000.00</b></p> 
+			 <div class="progress-bar-container">
+                <div class="progress">
+                    <div class="progress-bar-fill"></div>
+                </div>
+             </div>
+			 <div>
+				<p><b>Monthly Deposit:</b>  P50,000.00</p> 
+                <p><b>Target Year:</b> 2076</p>
+			 </div>
+			<div class="deposit-btn text-center">
+                <button onclick="deposit()">Deposit Now</button>
+            </div>
+		</div>
+		<div class="col-md-7 retirement">
+			<div class="deposit-history">
+				<h1> Deposit History </h1>
+			</div>
+			<div class="deposit-record">
+				<table class="table table-responsive-md deposit">
+					<tbody>
+						<tr>
+						  <th scope="col"></th>
+						  <th scope="col">Date</th>
+						  <th scope="col">Mode</th>
+						  <th scope="col">Amount</th>
+						</tr>
+						<tr>
+							<td scope="row">Deposit</td>
+							<td>11-08-03</td>
+							<td>Card</td>
+							<td>P550.21</td> 
+						</tr>
+						<tr>
+							<td scope="row">Deposit</td>
+							<td>10-8-03</td>
+							<td>Card</td>
+							<td>P1500.00</td> 
+						</tr>
+						<tr>
+							<td scope="row">Deposit</td>
+							<td>9-08-03</td>
+							<td>E-payment</td>
+							<td>P900.21</td> 
+						</tr>
+						<tr>
+							<td scope="row">Deposit</td>
+							<td>8-08-03</td>
+							<td>Card</td>
+							<td>P11000.00</td> 
+						</tr>
+						<tr>
+							<td scope="row">Deposit</td>
+							<td>7-08-03</td>
+							<td>E-payment</td>
+							<td>P300.00</td> 
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	</body>
+	<footer >
+	<div class="container-fluid">
+		<div class="row" id="footer">
+			<div class="col-md-8">
+				<div class="footer-clmn1">
+				<h1>CashMate</h1>
+				<p>tagline</p>
+			</div>
+			</div>
+			<div class="col-md-4">
+				<div class="footer-clmn2">
+				<p> STAY CONNECTED </p>
+				<a href="#"><i class="fa fa-facebook fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-twitter fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-linkedin fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-youtube fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-envelope fa-2x" style="color: white"></i></a>
+			</div>
+		</div>
+	</div>
+	<div class="row" id="footer-b">
+		<div class="col-md-6">
+			<div class="footer-2clmn1">
+				<p> Copyright 2023 © CashMate. All rights reserved.</p>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="footer-2clmn2">
+				<p><a href="#">Terms of Use </a>|<a href="Privacy-Policy.html"> Privacy Policy </a>|<a href="#"> Site Map </a>|</p>
+			</div>
+		</div>
+	</div>
+  </footer>
+</html>

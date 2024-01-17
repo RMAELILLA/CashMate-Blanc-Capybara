@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CashMate | User Profile</title>
+    <link rel="stylesheet" href="g-account-settings-page.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap" rel="stylesheet">
+    <style>
+    body {
+        font-family: 'Lexend', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: rgb(245, 245, 245);
+        background: linear-gradient(176deg, rgba(245, 245, 245, 1) 0%, rgba(102, 160, 144, 1) 94%);
+        }
+
+    .container {
+        display: flex;
+        border: 0;
+        margin-top: 10%;
+        padding: 10%;
+    }
+
+    .section1 {
+        border: 2px groove #ccc;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .section2 {
+        border: 2px groove #ccc;
+        background-color: #fff;
+        border-radius: 10px;
+        width: 100%;
+        padding: 10px;
+        margin: 10px;
+    }
+
+    hr {
+        opacity: 100%;
+        width: 100%;
+        border: 1;
+        border-top: 2px solid #000;
+        margin: auto;
+    }
+    
+    .account-settings-links {
+        background-color: #f8f9fa;
+        border: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .list-group-item {
+        cursor: pointer;
+        border: none;
+    }
+
+    .list-group-item.active {
+        background-color: #6ABA8C;
+        color: #fff;
+    }
+
+    .form-group input[type="file"] {
+        display: none; /* Hide the default file input */
+    }
+
+    .label-upload-photo {
+        background-color: #6ABA8C;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 30px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .label-upload-photo:hover {
+        background-color: #5e9665;
+    }
+
+    button {
+        background-color: #6ABA8C;
+        color: #fff;
+        width: 100%;
+        max-width: 20%;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="section1">
+            <div class="username-info">
+                <div class="username-pic">
+                    <img src="Images/profile photo icon.png" height="70" width="70">
+                    <div class="user">
+                        <span class="username-label"><b>Username</b></span>
+                        <label id="email"><b>username@example.com</b></label>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group list-group-flush account-settings-links">
+                <a class="list-group-item list-group-item-action active" data-toggle="list"
+                    href="#account-general">Account Settings</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list"
+                    href="g-1-get-help-page-page.html">Get Help</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list"
+                    href="g-2-privacy-policy-page.html">Privacy Policy</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list"
+                    href="#account-policy">Sign out</a>
+            </div>
+        </div>
+
+        <div class="section2">
+            <div class="tab-content">
+                <div class="tab-pane fade active show" id="account-general">
+                    <div class="card-body media align-items-center">
+                        <div class="form-group">
+                            <label class="form-label label-upload-photo">Update Profile Photo</label>
+                            <input type="file" name="profile-photo">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <button type="button">Edit</button>
+                            <p><b>Juan Dela Cruz</b></p>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">E-mail Address</label>
+                            <button type="button">Edit</button>
+                            <p id="email"><b>username@example.com</b></p>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <button type="button">Update</button>
+                            <p><b>********</b></p>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Delete Account?</label>
+                            <button type="button">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+            // Update Profile Photo
+        document.addEventListener('DOMContentLoaded', function () {
+        const fileInput = document.querySelector('input[name="profile-photo"]');
+        const labelUploadPhoto = document.querySelector('.label-upload-photo');
+        const profilePhoto = document.querySelector('.username-pic img');
+
+        // Update Profile Photo
+        fileInput.addEventListener('change', function (event) {
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    profilePhoto.src = e.target.result;
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+
+                // Update label text when a file is selected
+                labelUploadPhoto.textContent = 'Change Profile Photo';
+            }
+        });
+
+        // Reset label text when the file input is cleared
+        fileInput.addEventListener('click', function () {
+            this.value = null;
+            labelUploadPhoto.textContent = 'Update Profile Photo';
+        });
+
+    
+            // Edit Name and Email
+            document.querySelector('#edit-name-btn').addEventListener('click', function () {
+                const nameField = document.querySelector('#name');
+                const newName = prompt('Enter new name:', nameField.textContent.trim());
+    
+                if (newName !== null && newName !== '') {
+                    nameField.textContent = newName;
+                }
+            });
+    
+            document.querySelector('#edit-email-btn').addEventListener('click', function () {
+                const emailField = document.querySelector('#email');
+                const newEmail = prompt('Enter new email:', emailField.textContent.trim());
+    
+                if (newEmail !== null && newEmail !== '') {
+                    emailField.textContent = newEmail;
+                }
+            });
+    
+            // Update Password
+            document.querySelector('#update-password-btn').addEventListener('click', function () {
+                const currentPassword = prompt('Enter current password:');
+                // Simulate password update on the server (replace with actual server-side logic)
+                if (currentPassword !== null && currentPassword !== '') {
+                    alert('Password updated successfully!');
+                } else {
+                    alert('Password update failed. Please enter the correct current password.');
+                }
+            });
+    
+            // Delete Account
+            document.querySelector('#delete-account-btn').addEventListener('click', function () {
+                const confirmDelete = confirm('Are you sure you want to delete your account?');
+    
+                if (confirmDelete) {
+                    // Simulate account deletion on the server (replace with actual server-side logic)
+                    alert('Account deleted successfully!');
+                }
+            });
+    
+            // Sign Out
+            document.querySelector('#sign-out-btn').addEventListener('click', function () {
+                // Simulate sign out (replace with actual sign-out logic)
+                alert('Signed out successfully!');
+            });
+        });
+    </script>
+    
+    
+
+</body>
+</html>

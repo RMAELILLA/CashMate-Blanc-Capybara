@@ -1,0 +1,278 @@
+<html lang="en">
+  <head>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> CASHMATE | Ang iyong Cash-ama sa Pag-asenso</title> 
+	<link rel="icon" href="Images/CASHMATE.png" type="image/x-icon" width="50px" height="50px">
+	<link type= "text/css" rel="stylesheet" href="CashMate.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+	<nav class="navbar navbar-expand-lg "id="NavBar">
+		<div class="container-fluid" id="cf">
+			<div class="row" id="head">
+				<div class="col-md-3">
+					<div class="navbar-preheader">
+						<h1 class="text-fluid"><img class="img-fluid" src="Images/CASHMATE.png"  alt="CashMate logo"><b> CASHMATE</b> </h1>
+					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#drop-img">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>                        
+					  </button> 
+					</div>
+				</div>
+				<div class="col-md-9 collapse navbar-collapse navbar-right" id="drop-img">
+					<ul class="nav navbar-nav "  >
+						<li ><a href="Dashboard.html" class="link">Dashboard</a></li>
+						<li><a href="Income page.html" class="link">Income</a></li>
+						<li><a href="Spendings.html" class="link">Spendings</a></li>
+						<li ><a href="Cards.html">Cards</a></li>
+						<li ><a href="Planner.html" class="link">Planner</a></li> 
+						<li ><a href="" class="link"><img src="Images/question.png"></a></li> 
+						<li ><a href="" class="link"><img src="Images/settings.png"></a></li> 
+						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
+						  <ul class="dropdown-menu" style="background-color:rgb(140,195,126);">
+							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
+							<p style="margin-left:60;margin-right:60;">Username</p>
+							<p >Username@example.com</p>
+							<p style="margin-left:60;margin-right:60;" ><a href="#" onclick="signOut()">Sign-out</a></p>
+						  </ul>
+						</li> 
+					 </ul>
+					 
+				</div>
+		</div>
+	</nav>
+	<script>
+    // JavaScript for handling sign-out
+    function signOut() {
+      // You can add additional logic here, such as clearing user session
+      alert('Signing out...');
+    }
+  </script>
+  </div>
+	<div class="container-fluid">
+		<div class="col-md-3 text-center" id="card-holder">
+			<img src="Images/CreditCard.jpg " onclick="show(this,'details-div')"  style="width:250px; height:150px">
+			<img src="Images/CreditCard.jpg" onclick="show(this)" style="width:250px; height:150px" >
+			<img src="Images/CreditCard.jpg" onclick="show(this)" style="width:250px; height:150px" >
+			<button>+ Add Card</button>
+		</div>
+		<div id="details-div" style="display:none;">
+			<div class="col-md-4" style="margin-left:5%; margin-top:1%;">
+				<div id="details-div-row">
+					<h1> To Pay </h1>
+				</div>
+				<table class="table table-responsive-md table-hover to-pay">
+					<tbody>
+						<tr>
+							<th scope="row">Watsons<p>11-08-23</p></th>
+							<td colspan="1"></td>
+							<td>P550.21</td> 
+						</tr>
+						<tr>
+							<th scope="row">Wendy’s<p>11-08-23</p></th>
+							<td colspan="1"></td>
+							<td>P175.00</td> 
+						</tr>
+						<tr>
+							<th scope="row">Lee Jeans<p>11-08-23</p></th>
+							<td colspan="1"></td>
+							<td>P2000.00</td> 
+						</tr>
+						<tr>
+							<th scope="row">Lee Jeans<p>11-08-23</p></th>
+							<td colspan="1"></td>
+							<td>P1,120.00</td> 
+						</tr>
+					</tbody>
+				</table>
+				<div id="details-div-row">
+					<h1> Paid Transcations </h1>
+				</div>
+				<table class="table table-responsive-md table-hover paid">
+					<tbody>
+						<tr>
+							<th scope="row">Bonchon<p>11-02-23</p></th>
+							<td colspan="1"></td>
+							<td>P1,000.00</td> 
+						</tr>
+						<tr>
+							<th scope="row">Pancake house<p>11-08-23</p></th>
+							<td colspan="1"></td>
+							<td>P275.00</td> 
+						</tr>
+						<tr>
+							<th scope="row">Fully Booked<p>11-08-23</p></th>
+							<td colspan="1"></td>
+							<td>P1,450.00</td> 
+						</tr>
+						<tr>
+							<th scope="row">Ace Hardware<p>11-08-23</p></th>
+							<td colspan="1"></td>
+							<td>P578.00</td> 
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+		<div class="col-md-3" id="details-div-graphs" >
+				<div class="row text-center">
+					<h1>Monthly Spends</h1>
+					<p>P 5,376.52</p>
+					<div class="col-md-12">
+						<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+					</div>
+				</div>
+				<div class="row">
+					<h1>Limits</h1>
+					<div class="row" id="chart">
+						<div class="col-md-9" >
+							<canvas id="limits-monthly" style="width:100%;max-width:600px"></canvas>
+						</div>
+						<div class="col-md-3 text-center">
+							<p><b>P7,148.21</b><br>out of<br>P50,000.00</p>
+						</div>
+					</div>
+					<div class="row" id="chart">
+						<div class="col-md-9">
+							<canvas id="limits-yearly" style="width:100%;max-width:600px"></canvas> 
+						</div>
+						<div class="col-md-3 text-center">
+							 <p><b>P298,587.00</b><br>out of<br>P600,000.00</p>
+						</div>
+					</div>
+				</div>
+				 
+		</div>
+		</div>
+		
+		</div>
+		
+	</div>
+	<script>
+var xValues = ["January", "February", "March", "April", "May"];
+var yValues = [20, 10, 15, 3, 25,30];
+var barColors = ["#DCFDD4", "#DCFDD4","DCFDD4","#DCFDD4","#3F9544"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "May 2023"
+    }
+  }
+});
+</script>
+  </body>
+	 <script> 
+		function show(img,id) {
+		  img.style.transition = "all .2s";
+		  if (img.height == "150") {
+			img.style.height = "200px";
+			img.style.width = "350px"; 
+			document.getElementById(id).style.display='block';
+		  } else{
+			img.style.height = "150px";
+			img.style.width = "250px";
+			document.getElementById(id).style.display='none';
+		  }
+		}
+	 </script>
+	 <script>
+		var xValues = [];
+		var yValues = [50000, 7148.21];
+		var barColors = ["#D9D9D9","#DCFDD4",];
+
+		new Chart("limits-monthly", {
+		  type: "doughnut",
+		  data: {
+			labels: xValues,
+			datasets: [{
+			  backgroundColor: barColors,
+			  data: yValues
+			}]
+		  },
+		  options: {
+			title: {
+			  display: true,
+			  text: "Monthly" 
+			  
+			}
+		  }
+		});
+	</script>
+	<script>
+		var xValues = [];
+		var yValues = [600000.00,298587.00];
+		var barColors = ["#D9D9D9","#DCFDD4",];
+
+		new Chart("limits-yearly", {
+		  type: "doughnut",
+		  data: {
+			labels: xValues,
+			datasets: [{
+			  backgroundColor: barColors,
+			  data: yValues
+			}]
+		  },
+		  options: {
+			title: {
+			  display: true,
+			  text: "Yearly"
+			}
+		  }
+		});
+	</script>
+  </body>
+    <footer >
+	<div class="container-fluid">
+		<div class="row" id="footer">
+			<div class="col-md-8">
+				<div class="footer-clmn1">
+				<h1>CashMate</h1>
+				<p>tagline</p>
+			</div>
+			</div>
+			<div class="col-md-4">
+				<div class="footer-clmn2">
+				<p> STAY CONNECTED </p>
+				<a href="#"><i class="fa fa-facebook fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-twitter fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-linkedin fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-youtube fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-envelope fa-2x" style="color: white"></i></a>
+			</div>
+		</div>
+	</div>
+	<div class="row" id="footer-b">
+		<div class="col-md-6">
+			<div class="footer-2clmn1">
+				<p> Copyright 2023 © CashMate. All rights reserved.</p>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="footer-2clmn2">
+				<p><a href="#">Terms of Use </a>|<a href="Privacy-Policy.html"> Privacy Policy </a>|<a href="#"> Site Map </a>|</p>
+			</div>
+		</div>
+	</div>
+  </footer>
+</html>
+
+ 

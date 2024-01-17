@@ -1,0 +1,1009 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap');
+/**/
+html
+{
+	scroll-behavior:smooth;
+	scroll-padding-top:var(--scroll-padding,100px);
+}
+body
+{
+	background-color: #4CAF50;
+	height:100%;	
+}
+#Bg
+{
+   background-color: #4CAF50;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;	
+  height:100%;  
+  
+}
+#logo
+{
+	padding-left:10%;
+	padding-top:10%;
+}
+#logo img
+{
+	height:300px;
+	width:300px; 
+}
+.navbar-preheader .navbar-toggle {
+    border: 1px solid white;
+    background-color: transparent;
+    margin-right: 0;
+}
+.navbar-preheader .navbar-toggle .icon-bar {
+    background-color: white;
+}
+ 
+#head
+{
+	margin:0;
+	padding:0;
+}
+#head h1
+{
+	color:white;
+	font-family:'Lexend',sans-serif;
+	font-size:25px;
+	margin:0;
+	padding:0;
+}
+#head img
+{
+	max-height:70px;
+	max-width:80px;
+	margin:0;
+	padding:0;
+}
+ #NavBar
+{
+	background: rgb(140,195,126);
+	background: linear-gradient(90deg, rgba(140,195,126,1) 0%, rgba(72,182,154,1) 100%);
+	margin-bottom:0px;
+	color:white;
+	position:sticky;
+	top:0;
+	z-index:1; 
+
+}
+#drop-img a
+{
+	color: white;
+	font-family:Arial, sans-serif;
+	font-size:16px;
+	margin-bottom:5px;
+	margin-top:5px; 
+	 
+}
+#drop-img a:hover:not(active)
+{
+  background-color: #4CAF50;
+  color:white ; 
+}
+
+ 
+.dropdown-item
+{
+	background: rgb(140,195,126);
+	background: linear-gradient(90deg, rgba(140,195,126,1) 0%, rgba(72,182,154,1) 100%);
+	margin:5px;
+}
+ 
+.link .active li a {
+  background-color: #4CAF50;
+  color:white ; 
+}
+#drop-img img
+{
+	width:35px;
+	height:30px;
+	padding:0;
+}
+/*footer*/
+#footer
+{
+	background: rgb(140,195,126);
+	background: linear-gradient(90deg, rgba(140,195,126,1) 0%, rgba(72,182,154,1) 100%);
+}
+.footer-clmn1 h1
+{
+	font-family:'Lexend',sans-serif;
+	font-size:25px;
+	text-align:center;
+	color:white;
+	
+}
+.footer-clmn1 p
+{
+	font-family:'Lexend',sans-serif;
+	font-size:20px;
+	text-align:center;
+	color:white;
+}
+.footer-clmn2 p
+{
+	font-family:'Lexend',sans-serif;
+	font-size:20px;
+	text-align:right;
+	color:white;
+	padding-top:1%;
+}
+#footer-b
+{
+	background: rgb(140,195,126);
+	background: linear-gradient(90deg, rgba(140,195,126,1) 0%, rgba(72,182,154,1) 100%);
+	border-top:1px solid white;
+}
+.footer-2clmn1 p
+{
+	font-family:'Lexend',sans-serif;
+	font-size:15px;
+	text-align:left;
+	color:white; 
+}
+.footer-clmn2 
+{
+  font-size:18px;
+  text-align:right; 
+  color:white; 
+  padding:10px;
+}
+.footer-2clmn2
+{
+	text-align:right; 
+}
+.footer-2clmn2 a
+{
+	text-decoration: none;
+	color: white;
+	text-align:right;
+}
+.footer-2clmn2 a:hover
+{
+	color:white;
+}
+/*login*/
+.name h1
+{
+	color:white;
+	font-family:'Lexend',sans-serif;
+	font-size:50px; 
+}
+#form 
+{
+  background: #4CAF50;
+  max-width: 60%;
+  height:100%;
+  margin-left:15%; 
+  margin-top:8%;
+  margin-bottom:20%;
+  padding: 20px;
+  text-align: center;  
+   
+}
+#form h1
+{
+	color: #ffffff;
+	font-size: 30px;
+	font-family: 'Lexend', sans-serif;
+	padding: 10px;
+}
+#form-control-input
+{
+	padding:25px;
+	margin-bottom:15px;
+	font-family: 'Lexend', sans-serif;
+	color: #000000;
+	outline: 0;
+	background: #ffffff;
+	width: 100%;
+	border-radius: 11px;
+	font-size: 12px;  
+}
+#forgot-password
+ {
+  text-align: right;
+  font-size: 15px;
+  color: #ffffff;
+  text-decoration: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+#forgot-password a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+#text
+{
+	color:white; 
+	font-size:18px;
+}
+.log
+{
+	font-family: 'Lexend', sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background-color: #8DBC71;
+	border: 2px solid #3E893E;
+	border-radius: 11px;
+	width: 70%;
+	padding: 15px; 
+	-webkit-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+}
+.log button:hover {
+  background-color: #3E893E;
+}
+.log button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #3E893E;
+  border-radius: 25px;
+  z-index: -5;
+  transform: scaleX(1);
+  transform-origin: 0 50%;
+  transition: transform 0.3s ease-out;
+}
+.log button:hover:before {
+  transform: scaleX(0);
+}
+#message
+ {
+  margin: 15px 0 0;
+  color: #ffffff;
+  font-size: 15px;
+  word-spacing: 5px;
+  font-weight:normal;
+}
+
+#message a 
+{
+  color: #FFFE3E;
+  text-decoration: none;
+}
+/* Create Account CSS section*/
+#CreateAccount
+{
+	width:100%;
+	height:100%;  
+}
+ 
+#left-side
+{
+	background: white;
+	
+}
+#left-side img
+{
+	width:90%;
+	max-height:650px;  
+	margin:auto;
+}
+#right-side
+{
+	background-color:white;
+	margin-top:25px; 
+	 
+}
+#right-side h1
+{
+	font-size:30px;
+	padding-top:25px;
+	color:black;
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+}
+#SignIn
+{
+	margin:30px;
+}
+#line-one label 
+{
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
+	font-weight:normal;
+	margin-left:10px;
+}
+
+#line-one input 
+{
+    font-family: 'Lexend', sans-serif;
+    color: #000000;
+    outline: 0;
+    background: #d4caca;
+    width: 100%;
+    border: 0;
+    border-radius: 2px;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+.terms
+ {
+    width: 70%;
+    padding: 25px 60px 0 60px;
+    height: auto;
+	 
+}
+.terms lable
+{
+	font-size: 15px;
+	font-weight:normal;
+	 
+}
+.terms a
+{
+    text-decoration: none; 
+	 
+}
+.col-md-11
+{
+	margin-top:10px;
+}
+#create-acc-button 
+{
+    padding-top:12px;  
+	border: none;
+    background-color: rgb(72, 172, 72);
+	height: auto;
+    cursor: pointer;
+    color: white;
+    width: auto;
+    font-size: 20px;
+    padding: 20px;
+	font-weight:normal;
+	border-radius:0;
+
+}
+#old-acc p 
+{
+     font-size:16px;
+	 font-weight:normal;
+	 font-family:'Lexend',sans-serif;
+	 padding-top:10px;
+}
+#old-acc a 
+{
+    text-decoration: none;
+    cursor: pointer;
+}
+/*Reset Password CSS*/
+#reset-container
+{
+	background-color: #4CAF50;
+}
+#form-holder
+{
+	margin-top:15%;
+	border-radius:10px;
+}
+#reset-button
+{
+	background-color: #8DBC71;
+	border: 2px solid #3E893E;
+    border-radius: 11px;
+	padding: 15px;
+	color:white;
+	font-size:18px;
+	font-family:'Lexend',sans-serif;
+}
+ 
+/*cards*/
+#card-holder
+{
+	background: rgb(220,253,212);
+	background: linear-gradient(90deg, rgba(220,253,212,1) 0%, rgba(130,193,130,1) 100%);
+	margin-top:25px;
+	margin-bottom:20px;
+}
+#card-holder img
+{
+	width:250px;
+	height:150px;
+	margin:20px;
+}
+#details-div
+{
+	margin-top:25px;
+}
+#details-div-graphs
+{
+	margin-top:25px;
+	margin-left:10px;
+}
+#details-div-graphs h1
+{
+	font-family:'Lexend',sans-serif;
+	font-size:25px; 
+	font-weight:bold;
+	border-bottom:none;
+}
+#details-div-graphs p
+{
+	font-family:'Lexend',sans-serif;
+	font-size:18px; 
+	font-weight:bold;
+	border-bottom:none;
+}
+#details-div-row h1
+{
+	font-family:'Lexend',sans-serif;
+	font-size:25px; 
+	font-weight:bold;
+}
+#chart p
+{
+	font-family:'Lexend',sans-serif;
+	font-size:16px;
+	color:black;
+	margin-top:20px;
+	font-weight:normal;
+}
+
+.to-pay th
+{
+	font-family:'Lexend',sans-serif;
+	font-weight:lighter; 
+	font-size:16;
+	margin:5;
+}
+.to-pay td
+{
+	font-family:'Lexend',sans-serif;
+	font-weight:500;
+	color:green;
+	font-size:16;
+}
+.paid th
+{
+	font-family:'Lexend',sans-serif;
+	font-weight:lighter; 
+	font-size:16;
+	margin:5;
+}
+.paid td
+{
+	font-family:'Lexend',sans-serif;
+	font-weight:500;
+	color:red;
+	font-size:16;
+}
+#card-holder button
+{
+	padding:15px;
+	text-align:center;
+	background-color:#EEEEEE;
+	border:none;
+	border-radius:12px;
+	margin-bottom:15px;
+}
+/*dashboard*/
+#username-greetings
+{
+  height: 18%;
+  background: linear-gradient(180deg, #DCFDD4 0%, #82C182 100%); 
+}
+#username-greetings h1
+{
+	font-size:25px;
+	margin:0;
+	padding:30px 50px 30px ;
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+}
+.bordered{
+  border-radius: 20px;
+  border: 1px solid #82C182;
+  background-color: #FFF;  
+  height:90%;
+}
+.bordered h1
+{
+	font-size:20px;
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+	margin-top:50px;
+}
+.Available-balance{
+  border-radius: 20px;
+  border: 1px solid #82C182;
+  background-color: #FFF;  
+  height:45%;
+}
+.Available-balance h1
+{
+	font-size:18px;
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+}
+.Available-balance button
+{
+	padding:10px;
+	border-radius:10px;
+}
+.spending-limit{
+  border-radius: 20px;
+  border: 1px solid #82C182;
+  background-color: #FFF;  
+  height:40%;
+}
+.spending-limit h1
+{
+	font-size:20px;
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+}
+.income-and-spendings-container > button{
+  border-radius: 20px;
+  background: #FFF; 
+  padding: 4px 30px;
+  min-width: 95px;
+  text-align: center;
+  position: relative;
+  margin:10px  ; 
+}
+
+.income-button{
+  border: 4px solid #82C182; 
+}
+
+.spendings-button{
+  border: 4px solid #FF1F07; 
+}
+
+.up-arrow,
+.down-arrow{
+  position: absolute;
+  left: -10px;
+  top: -2px;
+}
+.goal-button,
+.edit-limit-button{
+  border-radius: 30px;
+  background: #A1C486; 
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 30px;
+  width: auto;
+  height: auto; 
+  border: none; 
+}
+/*Privacy=Policy*/
+.Privacy-Policy
+{
+	margin-top:3%;
+}
+.Privacy-Policy h1
+{
+	font-family:'Lexend',sans-serif;
+	font-size:30px;
+	color:#6ABA8C;
+}
+.Privacy-Policy h2
+{
+	font-family:'Lexend',sans-serif;
+	font-size:25px;
+	color:#6ABA8C;
+	font-weight:bold;
+}
+.Privacy-Policy h3
+{
+	font-family:'Lexend',sans-serif;
+	font-size:20px;
+	color:#6ABA8C;
+	font-weight:bold;
+}
+.Privacy-Policy p
+{
+	font-family:'Lexend',sans-serif;
+	font-size:16px;
+	color:black; 
+}
+/*Income*/
+.Income{
+  border-radius: 20px;
+  border: 1px solid #82C182;
+  background-color: #FFF;  
+  height:auto;
+}
+.Income h1
+{
+	font-size:30px;
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+	margin-top:25px;
+	margin-left:5;
+}
+.s2--add-button {
+	width: 30px;
+	margin-top:25px;
+	cursor: pointer;
+	margin-left:5;
+	float:left;
+}
+
+#openPopupBtn {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+.section2--rect {
+	background: linear-gradient(
+		90deg, 
+		rgb(140, 195, 126) 10%,
+		rgb(255, 255, 255) 100%
+	); 
+	margin:10px;  
+	height:auto;
+}
+.s2--income-img 
+{ 
+	margin-top:10;
+}
+ 
+.s2--desc-title 
+ { 
+	font-size: 20px;
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+	margin-top:10;
+	margin-bottom:0;
+}
+.s2--desc-categ 
+{
+	font-size: 14px;
+	font-weight: lighter;
+	font-family:'Lexend',sans-serif;
+	margin:0;
+}
+
+.s2--desc-date 
+{
+	font-size: 14px;
+	font-weight: lighter;
+	font-family:'Lexend',sans-serif;
+	margin-top:10;
+	margin-bottom:0;
+}
+.s2--desc-amount 
+{
+	font-size: 25px;
+	font-weight: bold;
+	font-family:'Lexend',sans-serif;
+}
+.Computed-Income
+{
+  border-radius: 20px;
+  border: 1px solid #82C182;
+  background-color: #FFF;  
+  height:auto;
+}
+.Computed-Income button
+{
+	padding:10px;
+	background-color:white;
+	font-size:20px;
+	border:1px solid #6ABA8C;
+	border-radius:15px;
+	margin-bottom:20px;
+	font-weight:bold;
+}
+.Computed-Income h1
+{
+	font-size:25px;
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+	margin-top:25px;
+	margin-left:5;
+}
+.section3 h1
+{
+	color: #6ABA8C;
+	font-size: 40px;
+	font-weight: 600; 
+	border-bottom:1px solid #6ABA8C;
+	font-family:'Lexend',sans-serif;
+}
+.section3 p
+{ 
+	font-size: 16; 
+	font-family:'Lexend',sans-serif;
+}
+/*pop-up form*/
+.popup {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 15px;
+	background: #fff;
+	width: 500px;
+	max-height: auto;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+	cursor: pointer;
+	margin-top:20px; 
+	margin-bottom:25px; 
+}
+.pop-up label
+{
+	font-size:16px;
+}
+#openPopupBtn {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+.form-container {
+	max-width: 500px; 
+	padding:0 5 0 5;
+	background-color: white;
+	height:auto;
+}
+
+.form-container h3 {
+	color: white;
+	background-color: #8DBC71;
+	padding: 15px;
+	margin-top:10px;
+	margin-bottom: 15px;
+	text-align: center; 
+}
+
+.form-container input[type=text], 
+.form-container input[type=category],
+.form-container input[type=date],
+.form-container input[type=number] {
+	width: 100%;
+	padding: 12px;
+	margin: 5px 0 22px 0;
+	border: none;
+	background: #f1f1f1;
+}
+
+.btn-submit { 
+	color: black;
+	font-size: 15px;
+	padding: 8px 12px;
+	border: 5px solid #6ABA8C;
+	border-radius: 20px;
+	cursor: pointer;
+	width: 100%;
+	margin-bottom:5px;
+	opacity: 0.8; 
+}
+ 
+.btn-cancel {
+	background-color: white;
+	color: black;
+	font-size: 15px;
+	padding: 8px 12px;
+	border: 3px solid red;
+	border-radius: 20px;
+	cursor: pointer;
+	width: 100%;
+	margin-bottom:5px;
+	opacity: 0.8; 
+}
+
+.btn-submit:hover, 
+.btn-cancel:hover {
+	opacity: 1;
+}
+/*Planner*/
+#Planner
+{
+  height: 18%;
+  background: linear-gradient(180deg, #DCFDD4 0%, #82C182 100%); 
+}
+#Planner h1
+{
+	font-size:30px;
+	margin:0;
+	padding:30px 50px 30px ;
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+}
+.planner-nav
+{
+    padding-bottom: 10px;
+	margin-left:25; 
+}
+
+.planner-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.planner-nav li {
+    margin-right: 10px;
+}
+
+.planner-nav a {
+    text-decoration: none;
+    color: #80947F;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px;
+    word-spacing: 5px;
+}
+
+.planner-nav li:hover a {
+    color: black;
+    font-weight: bold;
+}
+.retirement 
+{
+    flex: 1;
+    border: 2px groove #ccc;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px; 
+}
+.retirement img { 
+    top: 10px;
+    width: 50px;
+    height: auto;
+}
+.retirement h1
+{
+	font-family:'Lexend',sans-serif;
+	font-size:25px;
+	font-weight:bold;
+}
+.retirement p
+{
+	font-family:'Lexend',sans-serif;
+	font-size:16;
+	font-weight:lighter;
+	margin-left:25px;
+}
+.progress-bar-container 
+{
+    margin-top: 10px;
+}
+
+.progress{
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #6ABA8C;
+    width: 10%;
+}
+.deposit-btn button {
+    margin: 10px;
+    text-align: center;
+	 background-color: #6ABA8C;
+    color: #fff;
+    width: 100%;
+    max-width: 50%;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.deposit-history h1
+{
+	font-family:'Lexend',sans-serif;
+	font-size:20px;
+	font-weight:bold;
+}
+.deposit th
+{
+	font-family:'Lexend',sans-serif;
+	font-weight:600; 
+	font-size:16; 
+}
+.deposit td
+{
+	font-family:'Lexend',sans-serif;
+	font-weight:lighter;
+	color:black;
+	font-size:16;
+}
+/*Spendings*/
+#spendings
+{
+  height: 18%;
+  background: linear-gradient(180deg, #DCFDD4 0%, #82C182 100%); 
+}
+#spendings h1
+{
+	font-size:30px;
+	margin:0;
+	padding:30px 50px 30px ;
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+}
+.spend h1
+{
+	font-size:25px;
+	margin:0;
+	padding:30px 50px 30px ;
+	font-family:'Lexend',sans-serif; 
+}
+.spend button
+{
+	padding:10px;
+	border-radius:15px;
+	background-color:#6ABA8C;
+	border:none;
+	font-size:16;
+}
+.spendings
+{
+	border:1px solid green;
+}
+.spendings th
+{
+	font-family:'Lexend',sans-serif;
+	font-weight:600; 
+	font-size:16; 
+	
+}
+.spendings p
+{
+	font-family:'Lexend',sans-serif;
+	font-weight:lighter;
+	color:black;
+	font-size:12; 
+}
+.spendings td
+{
+	font-family:'Lexend',sans-serif;
+	font-weight:lighter;
+	color:black;
+	font-size:16;
+}
+#Spendings-graph
+{
+	border:1px solid green; 
+	border-radius:15px;
+}
+.categories h1
+{
+	font-family:'Lexend',sans-serif;
+	font-weight:bold;
+	color:black;
+	font-size:25;
+}
+.categories button
+{
+	padding:10px;
+	border:1px solid green;
+	border-radius:10px;
+	font-size:18;
+	background-color:white;
+	width:45%;
+	margin:10px;
+}
+/*user*/
+.dropdown-menu p  
+{ 
+  color:black ; 
+  font-family:'Lexend',sans-serif;
+  font-size:16px;
+  margin:10px;
+}
+ 
+ 
