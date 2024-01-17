@@ -580,11 +580,11 @@ body
   border: none; 
 }
 /*Privacy=Policy*/
-.Privacy-Policy
+.Privacy-Policy, .Site-Map
 {
 	margin-top:3%;
 }
-.Privacy-Policy h1
+.Privacy-Policy h1, .Site-Map h1
 {
 	font-family:'Lexend',sans-serif;
 	font-size:30px;
