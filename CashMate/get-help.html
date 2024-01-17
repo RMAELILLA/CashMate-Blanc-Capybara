@@ -3,12 +3,17 @@
 
 <head>
     <title>CashMate | Get Help</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> CASHMATE | Ang iyong Cash-ama sa Pag-asenso</title> 
+	<link rel="icon" href="Images/CASHMATE.png" type="image/x-icon" width="50px" height="50px"> <!-- title icon -->
+	<link type= "text/css" rel="stylesheet" href="CashMate.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap">
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background-color: #04AA6D;
-            color: white;
         }
 
         * {
@@ -17,41 +22,6 @@
 
         .container {
             padding: 5%;
-        }
-
-        .Cashmate {
-            text-align: center;
-        }
-
-        .get-help-section {
-            text-align: center;
-            margin: auto;
-            max-width: 600px; /* Adjust the max-width as needed */
-            padding: 5x;
-        }
-
-        .contact-info {
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .social-icons {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 10px;
-            padding: 10px;
-        }
-
-        .social-icons li {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        .social-icons a {
-            text-decoration: none;
-            color: white;
-            font-size: 20px;
         }
         
         input[type=text],
@@ -102,101 +72,171 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="Cashmate">
-            <img src="Images/CASHMATE.png" height="100" width="100">
-            <div class="get-help-section">
-                <h1>How can we help you?</h1>
-                <p>If you have any questions or need assistance, feel free to contact us:</p>
+    <nav class="navbar navbar-expand-lg "id="NavBar">
+		<div class="container-fluid" id="cf">
+			<div class="row" id="head">
+				<div class="col-md-3">
+					<div class="navbar-preheader">
+						<h1 class="text-fluid"><img class="img-fluid" src="Images/CASHMATE.png"  alt="CashMate logo"><b> CASHMATE</b> </h1>
+					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#drop-img">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>                        
+					  </button> 
+					</div>
+				</div>
+				<div class="col-md-9 collapse navbar-collapse navbar-right"id="drop-img">
+					<ul class="nav navbar-nav "  >
+						<li ><a href="Dashboard.html" class="link">Dashboard</a></li>
+						<li><a href="Income page.html" class="link">Income</a></li>
+						<li><a href="Spendings.html" class="link">Spendings</a></li>
+						<li ><a href="Cards.html">Cards</a></li>
+						<li ><a href="Planner.html" class="link">Planner</a></li> 
+						<li ><a href="get-help.html" class="link"><img src="Images/question.png"></a></li> 
+						<li ><a href="privacy-policy.html" class="link"><img src="Images/settings.png"></a></li> 
+						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
+						  <ul class="dropdown-menu" style="background-color:rgb(140,195,126);">
+							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
+							<p style="margin-left:60;margin-right:60;">Username</p>
+							<p >Username@example.com</p>
+							<p style="margin-left:60;margin-right:60;" ><a href="#" onclick="signOut()">Sign-out</a></p>
+						  </ul>
+						</li> 
+					</ul>
+				</div>
+		</div>
+	</nav>
+    <section>
+        <div class="container">
+            <div class="intro">
+                <p>Welcome to CashMate, your trusted platform for effective financial management. This user manual is designed to walk you through the various features and functionalities to ensure a seamless user experience.</p>
+            </div>
+            <div class="help">
+                <h1>How can we Help You?</h1>
+                <div class="get-start">
 
-                <div class="contact-info">
-                    <p>Email: support@cashmate.com</p>
-                    <p>Phone: +1 (555) 123-4567</p>
-                
-                    <ul class="social-icons">
-                    <li><a href="#" target="_blank">Facebook</a></li>
-                    <li><a href="#" target="_blank">Twitter</a></li>
-                    <li><a href="#" target="_blank">Instagram</a></li>
-                    <!-- Add more social icons as needed -->
-                    </ul>
+                </div>
+                <div class="features">
+
+                </div>
+                <div class="faqs">
+
+                </div>
+                <div class="troubleshoot">
+
+                </div>
+                <div class="contact">
+
+                </div>
+            </div>
+            <div class="feedback-section">
+                <h2>We would love your Feedback</h2>
+
+                <!-- Website Feedback -->
+                <p>Website Feedback:</p>
+                <form>
+                <input type="radio" id="html1" name="website_feedback" value="Poor">
+                <label for="html1">Poor</label><br>
+                <input type="radio" id="css1" name="website_feedback" value="Somewhat Bad">
+                <label for="css1">Somewhat Bad</label><br>
+                <input type="radio" id="javascript1" name="website_feedback" value="Neutral">
+                <label for="javascript1">Neutral</label><br>
+                <input type="radio" id="javascript2" name="website_feedback" value="Somewhat Good">
+                <label for="javascript2">Somewhat Good</label><br>
+                <input type="radio" id="javascript3" name="website_feedback" value="Excellent">
+                <label for="javascript3">Excellent</label><br>
+                </form>
+
+                <!-- Service Feedback -->
+                <p>Service Feedback:</p>
+                <form>
+                <input type="radio" id="html2" name="service_feedback" value="Poor">
+                <label for="html2">Poor</label><br>
+                <input type="radio" id="css2" name="service_feedback" value="Somewhat Bad">
+                <label for="css2">Somewhat Bad</label><br>
+                <input type="radio" id="javascript4" name="service_feedback" value="Neutral">
+                <label for="javascript4">Neutral</label><br>
+                <input type="radio" id="javascript5" name="service_feedback" value="Somewhat Good">
+                <label for="javascript5">Somewhat Good</label><br>
+                <input type="radio" id="javascript6" name="service_feedback" value="Excellent">
+                <label for="javascript6">Excellent</label><br>
+                </form>
+
+                <!-- Other Feedback -->
+                <p>Other Feedback:</p>
+                <form>
+                <input type="radio" id="html3" name="other_feedback" value="Poor">
+                <label for="html3">Poor</label><br>
+                <input type="radio" id="css3" name="other_feedback" value="Somewhat Bad">
+                <label for="css3">Somewhat Bad</label><br>
+                <input type="radio" id="javascript7" name="other_feedback" value="Neutral">
+                <label for="javascript7">Neutral</label><br>
+                <input type="radio" id="javascript8" name="other_feedback" value="Somewhat Good">
+                <label for="javascript8">Somewhat Good</label><br>
+                <input type="radio" id="javascript9" name="other_feedback" value="Excellent">
+                <label for="javascript9">Excellent</label><br>
+                </form>
+            </div>
+
+            <div class="contact-section">
+                <!-- Contact Form -->
+                <h3>Contact Form</h3>
+                <div class="contact-form">
+                <form action="/action_page.php">
+                    <label for="fname">Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                    <label for="lname">Email</label>
+                    <input type="text" id="lname" name="email" placeholder="Your Email">
+
+                    <label for="issue">What was the Problem?</label>
+                    <select id="issue" name="issue">
+                    <option value="Website">Website</option>
+                    <option value="Services">Services</option>
+                    <option value="Other">Other</option>
+                    </select>
+
+                    <label for="subject">Subject</label>
+                    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </section>
+    </body>
+    <footer>
+        <div class="container-fluid">
+            <div class="row" id="footer">
+                <div class="col-md-8">
+                    <div class="footer-clmn1">
+                    <h1>CashMate</h1>
+                    <p>tagline</p>
+                </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="footer-clmn2">
+                    <p> STAY CONNECTED </p>
+                    <a href="#"><i class="fa fa-facebook fa-2x" style="color: white"></i></a>
+                    <a href="#"><i class="fa fa-twitter fa-2x" style="color: white"></i></a>
+                    <a href="#"><i class="fa fa-linkedin fa-2x" style="color: white"></i></a>
+                    <a href="#"><i class="fa fa-youtube fa-2x" style="color: white"></i></a>
+                    <a href="#"><i class="fa fa-envelope fa-2x" style="color: white"></i></a>
                 </div>
             </div>
         </div>
-        <div class="feedback-section">
-            <h2>We would love your Feedback</h2>
-
-            <!-- Website Feedback -->
-            <p>Website Feedback:</p>
-            <form>
-            <input type="radio" id="html1" name="website_feedback" value="Poor">
-            <label for="html1">Poor</label><br>
-            <input type="radio" id="css1" name="website_feedback" value="Somewhat Bad">
-            <label for="css1">Somewhat Bad</label><br>
-            <input type="radio" id="javascript1" name="website_feedback" value="Neutral">
-            <label for="javascript1">Neutral</label><br>
-            <input type="radio" id="javascript2" name="website_feedback" value="Somewhat Good">
-            <label for="javascript2">Somewhat Good</label><br>
-            <input type="radio" id="javascript3" name="website_feedback" value="Excellent">
-            <label for="javascript3">Excellent</label><br>
-            </form>
-
-            <!-- Service Feedback -->
-            <p>Service Feedback:</p>
-            <form>
-            <input type="radio" id="html2" name="service_feedback" value="Poor">
-            <label for="html2">Poor</label><br>
-            <input type="radio" id="css2" name="service_feedback" value="Somewhat Bad">
-            <label for="css2">Somewhat Bad</label><br>
-            <input type="radio" id="javascript4" name="service_feedback" value="Neutral">
-            <label for="javascript4">Neutral</label><br>
-            <input type="radio" id="javascript5" name="service_feedback" value="Somewhat Good">
-            <label for="javascript5">Somewhat Good</label><br>
-            <input type="radio" id="javascript6" name="service_feedback" value="Excellent">
-            <label for="javascript6">Excellent</label><br>
-            </form>
-
-            <!-- Other Feedback -->
-            <p>Other Feedback:</p>
-            <form>
-            <input type="radio" id="html3" name="other_feedback" value="Poor">
-            <label for="html3">Poor</label><br>
-            <input type="radio" id="css3" name="other_feedback" value="Somewhat Bad">
-            <label for="css3">Somewhat Bad</label><br>
-            <input type="radio" id="javascript7" name="other_feedback" value="Neutral">
-            <label for="javascript7">Neutral</label><br>
-            <input type="radio" id="javascript8" name="other_feedback" value="Somewhat Good">
-            <label for="javascript8">Somewhat Good</label><br>
-            <input type="radio" id="javascript9" name="other_feedback" value="Excellent">
-            <label for="javascript9">Excellent</label><br>
-            </form>
+        <div class="row" id="footer-b">
+            <div class="col-md-6">
+                <div class="footer-2clmn1">
+                    <p> Copyright 2023 © CashMate. All rights reserved.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="footer-2clmn2">
+                    <p><a href="terms-conditions.html">Terms of Use </a>|<a href="privacy-policy.html"> Privacy Policy </a>|<a href="sitemap.html"> Site Map </a>|</p>
+                </div>
+            </div>
         </div>
-
-        <div class="contact-section">
-            <!-- Contact Form -->
-            <h3>Contact Form</h3>
-            <div class="contact-form">
-            <form action="/action_page.php">
-                <label for="fname">Name</label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                <label for="lname">Email</label>
-                <input type="text" id="lname" name="email" placeholder="Your Email">
-
-                <label for="issue">What was the Problem?</label>
-                <select id="issue" name="issue">
-                <option value="Website">Website</option>
-                <option value="Services">Services</option>
-                <option value="Other">Other</option>
-                </select>
-
-                <label for="subject">Subject</label>
-                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
-                <input type="submit" value="Submit">
-            </form>
-        </div>
-    </div>
-
-</body>
+    </footer>
 
 </html>
