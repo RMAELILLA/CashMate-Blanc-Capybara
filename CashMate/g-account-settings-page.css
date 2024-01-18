@@ -2,45 +2,79 @@ body {
     font-family: 'Lexend', sans-serif;
     margin: 0;
     padding: 0;
-    background: rgb(245, 245, 245);
     background: linear-gradient(176deg, rgba(245, 245, 245, 1) 0%, rgba(102, 160, 144, 1) 94%);
 }
 
 .container {
     display: flex;
     border: 0;
-    margin-top: 10%;
-    padding: 10%;
 }
 
-.section1 {
+.section1, .section2 {
     border: 2px groove #ccc;
     background-color: #fff;
     border-radius: 10px;
-    padding: 20px;
     margin: 10px;
 }
 
 .section2 {
-    border: 2px groove #ccc;
-    background-color: #fff;
-    border-radius: 10px;
     width: 100%;
     padding: 10px;
-    margin: 10px;
 }
 
-.username-info-description {
+hr {
+    width: 100%;
+    border-top: 2px solid #000;
+    margin: auto;
+}
+
+.account-settings-links, .list-group-item, .form-group input[type="file"] {
+    border: none;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
+.list-group-item.active {
+    background-color: #6ABA8C;
+    color: #fff;
+}
+
+.label-upload-photo {
+    background-color: #6ABA8C;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.label-upload-photo:hover {
+    background-color: #5e9665;
+}
+
+button {
+    background-color: #6ABA8C;
+    color: #fff;
+    width: 100%;
+    max-width: 20%;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.username-info-description, .username-pic {
     display: flex;
 }
 
 .username-pic {
-    display: flex;
-    align-items: center; /* Align items vertically in the flex container */
+    align-items: center;
 }
 
 .user {
-    margin-left: 5%; /* Adjust the margin as needed */
+    margin-left: 5%;
 }
 
 .username-info {
@@ -52,31 +86,6 @@ body {
     font-weight: 500;
 }
 
-hr {
-    opacity: 100%;
-    width: 100%;
-    border: 1;
-    border-top: 2px solid #000;
-    margin: auto;
-}
-
-.account-settings-links {
-    background-color: #f8f9fa;
-    border: none;
-    display: flex;
-    flex-direction: column;
-}
-
-.list-group-item {
-    cursor: pointer;
-    border: none;
-}
-
-.list-group-item.active {
-    background-color: #6ABA8C;
-    color: #fff;
-}
-
 .tab-pane {
     display: none;
 }
@@ -85,7 +94,7 @@ hr {
     display: block;
 }
 
-.form-group button{
+.form-group button {
     float: right;
 }
 
