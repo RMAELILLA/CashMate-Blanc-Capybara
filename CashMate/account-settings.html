@@ -74,8 +74,8 @@
     button {
         background-color: #6ABA8C;
         color: #fff;
-        width: 75%;
-        max-width: 10%;
+        width: 100%;
+        max-width: 12%;
         border: none;
         border-radius: 10px;
         cursor: pointer;
@@ -102,14 +102,6 @@
         font-weight: 500;
     }
 
-    .tab-pane {
-        display: none;
-    }
-
-    .tab-pane.active {
-        display: block;
-    }
-
     .form-group button {
         float: right;
     }
@@ -118,6 +110,34 @@
         padding: 1%;
     }
 
+    .notification-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
 
     </style>
 </head>
@@ -177,6 +197,8 @@
                     href="get-help.html">Get Help</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list"
                     href="privacy-policy.html">Privacy Policy</a>
+                <a class="list-group-item list-group-item-action" data-toggle="modal"
+                    href="#notificationSettings">Notification Settings</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list"
                     href="login-page.html">Sign out</a>
             </div>
@@ -212,6 +234,54 @@
                             <button type="button">DELETE</button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="notificationSettings" tabindex="-1" role="dialog" aria-labelledby="notificationSettingsLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationSettingsLabel">CashMate - Notification Settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="process_settings.php" method="post">
+                        <label>
+                            <input type="checkbox" name="emailNotifications" checked>
+                            Receive Email Notifications
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="pushNotifications" checked>
+                            Receive Push Notifications
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="transactionAlerts" checked>
+                            Receive Transaction Alerts
+                            <span style="font-size: 12px; color: #666;">(Get notified for important transactions)</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="weeklySummary">
+                            Receive Weekly Spending Summary
+                            <span style="font-size: 12px; color: #666;">(A summary of your weekly expenses)</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="specialOffers">
+                            Receive Special Offers
+                            <span style="font-size: 12px; color: #666;">(Exclusive promotions and discounts)</span>
+                        </label>
+
+                        <!-- Add more options as needed -->
+
+                        <button type="submit">Save Settings</button>
+                    </form>
                 </div>
             </div>
         </div>
