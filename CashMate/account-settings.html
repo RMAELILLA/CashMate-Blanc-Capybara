@@ -6,12 +6,13 @@
     <title>CASHMATE | User Profile</title>
     <link rel="icon" href="Images/CASHMATE.png" type="image/x-icon" width="50px" height="50px">
     <link type= "text/css" rel="stylesheet" href="CashMate.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>  
     <style>
     
     body {
@@ -23,6 +24,7 @@
     .container {
         display: flex;
         border: 0;
+        padding: 15px;
     }
 
     .section1, .section2 {
@@ -72,9 +74,8 @@
     button {
         background-color: #6ABA8C;
         color: #fff;
-        width: 100%;
-        max-width: 20%;
-        padding: 5px 10px;
+        width: 75%;
+        max-width: 10%;
         border: none;
         border-radius: 10px;
         cursor: pointer;
@@ -183,7 +184,7 @@
 
         <div class="section2">
             <div class="tab-content">
-                <div class="tab-pane fade active show" id="account-general">
+                <div>
                     <div class="card-body media align-items-center">
                         <div class="form-group">
                             <input type="file" name="profile-photo">
@@ -193,22 +194,22 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="form-label">Name</label>
-                            <button type="button">Edit</button>
+                            <button type="button">EDIT</button>
                             <p><b>Juan Dela Cruz</b></p>
                         </div>
                         <div class="form-group">
                             <label class="form-label">E-mail Address</label>
-                            <button type="button">Edit</button>
+                            <button type="button">EDIT</button>
                             <p id="email"><b>username@example.com</b></p>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Password</label>
-                            <button type="button">Update</button>
+                            <button type="button">UPDATE</button>
                             <p><b>********</b></p>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Delete Account?</label>
-                            <button type="button">Delete</button>
+                            <button type="button">DELETE</button>
                         </div>
                     </div>
                 </div>
