@@ -36,10 +36,21 @@ function random_num($length)
 	$len = rand(4,$length);
 
 	for ($i=0; $i < $len; $i++) { 
-		# code...
 
 		$text .= rand(0,9);
 	}
 
 	return $text;
+}
+
+function get_total_income($con, $user_name) {
+	$sql = "SELECT SUM(amount) AS total_amount FROM income WHERE user_name = '$user_name'";
+	$result = mysqli_query($con, $sql);
+	
+	if ($result) {
+			$row = mysqli_fetch_assoc($result);
+			return $row['total_amount'];
+	} else {
+			return 0;
+	}
 }

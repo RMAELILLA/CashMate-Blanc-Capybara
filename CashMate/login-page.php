@@ -8,7 +8,6 @@ session_start();
 
 	if($_SERVER['REQUEST_METHOD'] == "POST")
 	{
-		//something was posted
 		$user_name = $_POST['user_name'];
 		$password = md5($_POST['password']);
 
@@ -92,7 +91,7 @@ session_start();
 											<button type="submit" class="log">LOGIN</button>
 									</div>
 									<div class="md-3" id="message">
-											<p>New To CASHMATE? <span style="margin-left: 12px;"><a href="register_form.php">Create An Account</a></span></p>
+											<p>New To CASHMATE? <span style="margin-left: 12px;"><a href="create-account.php">Create An Account</a></span></p>
 									</div>
 							</div>
 					</form>

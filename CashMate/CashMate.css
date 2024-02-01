@@ -519,7 +519,7 @@ body
   border-radius: 20px;
   border: 1px solid #82C182;
   background-color: #FFF;  
-  height:45%;
+  height:43%;
 }
 .Available-balance h1
 {
@@ -574,10 +574,10 @@ body
   background: #A1C486; 
   font-size: 12px;
   font-weight: 700;
-  line-height: 30px;
-  width: auto;
+  line-height: 30px; 
   height: auto; 
-  border: none; 
+  border: none;  
+
 }
 
 /*Calculator*/
@@ -948,7 +948,7 @@ button {
 }
 .planner-nav
 {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 	margin-left:25; 
 }
 
@@ -971,11 +971,16 @@ button {
     margin: 10px;
     word-spacing: 5px;
 }
+.planner-nav li:active a {
+		color:black;
+		font-weight: bold;
+}
 
 .planner-nav li:hover a {
     color: black;
     font-weight: bold;
 }
+
 .retirement 
 {
     flex: 1;
@@ -1018,12 +1023,12 @@ button {
 .progress-bar-fill {
     height: 100%;
     background-color: #6ABA8C;
-    width: 10%;
+    width: 90%;
 }
 .deposit-btn button {
     margin: 10px;
     text-align: center;
-	 background-color: #6ABA8C;
+	 	background-color: #6ABA8C;
     color: #fff;
     width: 100%;
     max-width: 50%;
@@ -1043,6 +1048,8 @@ button {
 	font-family:'Lexend',sans-serif;
 	font-weight:600; 
 	font-size:16; 
+	text-align: center;
+
 }
 .deposit td
 {
@@ -1050,7 +1057,59 @@ button {
 	font-weight:lighter;
 	color:black;
 	font-size:16;
+	text-align: center;
 }
+
+.planner-container {
+	max-width: 500px; 
+	padding:0 5 0 5;
+	background-color: white;
+	max-height:10%;
+}
+
+.planner-container h3 {
+	color: white;
+	background-color: #8DBC71;
+	padding-top: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+	margin-top:10px;
+	text-align: center; 
+}
+
+.planner-container input[type=text], 
+.planner-container input[type=category],
+.planner-container input[type=date],
+.planner-container input[type=number] {
+	width: 100%;
+	padding: 12px;
+	margin: 3px 0 8px 0;
+	border: none;
+	background: #f1f1f1;
+}
+
+.deposit-dropdown {
+	position: relative;
+  display: inline-block;
+	background-color: #8DBC71;
+	color:rgb(255, 255, 255)
+}
+
+.deposit-dropdown select {
+		width: 100%;
+		padding: 8px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		background-color: #8DBC71;
+		
+}
+
+.deposit-dropdown option:hover {
+	background-color: #000000 !important;
+}
+
 /*Spendings*/
 #spendings
 {
@@ -1135,5 +1194,8 @@ button {
   font-size:16px;
   margin:10px;
 }
+
  
+
+
  

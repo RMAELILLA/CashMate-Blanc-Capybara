@@ -7,7 +7,62 @@ session_start();
 	$user_data = check_login($con);
 
 ?>
+<?php
+$dataPoints = array( );
+$Data=array();
+$con=mysqli_connect("localhost","root","","login_cashmate_db"); 
 
+if (mysqli_connect_errno()) {
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+$sql="SELECT * FROM dashchart WHERE user_name='" . $user_data['user_name'] . "'";
+if ($result=mysqli_query($con,$sql)){	  
+	foreach($result as $row){
+		array_push($dataPoints, array( "label"=>"Transportation","y"=> $row["Transportation"]),
+		array( "label"=>"Clothing","y"=> $row["Clothing"]),
+		array( "label"=>"House","y"=> $row["House"]),
+		array( "label"=>"HealthCare","y"=> $row["HealthCare"]),
+		array("label"=>"Entertainment", "y"=> $row["Entertainment"]),
+		array("label"=>"Food", "y"=> $row["Food"]),
+		array( "label"=>"Pet","y"=> $row["Pet"]));
+	}
+}
+/* 
+$sql1="SELECT * FROM planner WHERE user_name='" . $user_data['user_name'] . "'";
+if ($res=mysqli_query($con,$sql1)){	  
+	foreach($res as $out){
+		array_push($Data, array( "label"=>"Retirement","y"=> $out['Retirement']),
+		array( "label"=>"HouseandLot","y"=> $out["HouseandLot"]),
+		array( "label"=>"Vehicle","y"=> $out["Vehicle"]));
+	}
+}*/
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $Retirement = mysqli_real_escape_string($con, $_POST['Retirement']);
+    $HouseandLot = mysqli_real_escape_string($con, $_POST['HouseandLot']);
+    $Vehicle = mysqli_real_escape_string($con, $_POST['Vehicle']);
+	$result = "SELECT * FROM planner WHERE user_name = '" . $user_data['user_name'] . "'";
+
+$query = $con->query($result);
+
+if ($query) {
+    if (mysqli_num_rows($query) >0) {
+       $sql = "UPDATE planner SET Retirement='$Retirement',HouseandLot='$HouseandLot', Vehicle='$Vehicle' WHERE user_name='" . $user_data['user_name'] . "'";
+		if ($con->query($sql) === TRUE) {
+		} else {
+		  echo "Error updating record: " . $con->error;
+		}
+    } else {
+         $insert = "INSERT INTO planner( user_name,Retirement, HouseandLot, Vehicle) VALUES ('" . $user_data['user_name'] . "','$Retirement','$HouseandLot','$Vehicle')";
+
+            mysqli_query($con, $insert);
+    }
+} else {
+    echo 'Error: ' . mysqli_error();
+}
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,11 +96,10 @@ session_start();
 				</div>
 				<div class="col-md-9 collapse navbar-collapse navbar-right" id="drop-img">
 					<ul class="nav navbar-nav "  >
-						<li ><a href="Dashboard.html" class="link">Dashboard</a></li>
-						<li><a href="Income page.html" class="link">Income</a></li>
+						<li ><a href="Dashboard.php" class="link">Dashboard</a></li>
+						<li><a href="Income-page.php" class="link">Income</a></li>
 						<li><a href="Spendings.html" class="link">Spendings</a></li>
-						<li ><a href="Cards.html">Cards</a></li>
-						<li ><a href="Planner.html" class="link">Planner</a></li> 
+						<li ><a href="Planner.php" class="link">Planner</a></li> 
 						<li ><a href="get-help.html" class="link"><img src="Images/question.png"></a></li> 
 						<li ><a href="account-settings.html" class="link"><img src="Images/settings.png"></a></li> 
 						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
@@ -53,39 +107,36 @@ session_start();
 							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
 							<p style="margin-left:60;margin-right:60;">Username</p>
 							<p >Username@example.com</p>
-							<p style="margin-left:60;margin-right:60;" ><a href="create-account.html" onclick="signOut()">Sign-out</a></p>
+							<p style="margin-left:60;margin-right:60;" ><a href="login-page.php" onclick="signOut()">Sign-out</a></p>
 						  </ul>
 						</li> 
-					 </ul>
-					 
+					 </ul> 
 				</div>
 		</div>
 	</nav>
 	<script>
-    // JavaScript for handling sign-out
     function signOut() {
-      // You can add additional logic here, such as clearing user session
       alert('Signing out...');
     }
   </script>
 	
 	<div class="container-fluid">
 		<div class="row" id="username-greetings"> 
-			<h1>Welcome Back, <span><?php echo $user_data['user_name'] ?>!</span></h1> 
+			<h1>Welcome Back, <span id="user_data"><?php echo $user_data['user_name'] ?>!</span></h1> 
 		</div>
 		<div class="container" style="margin-top:-25px;margin-bottom:20px;">
 			<div class="row gx-1" >
 				<div class="col-md-6" style="margin-bottom:10px;">
 					<div class="col-md-12 bordered text-center"  >
-						<h1>Dashboard</h1>
-						<canvas id="dashboard" style="width:100%;max-width:600px;height:70%;"></canvas> 
+						<div id="chartContainer" style="height: 370px; width: 100%; margin-top:5%;" ></div>
+				
 						 
 					</div>
 				</div>
 				<div class="col-md-6" >
 					<div class="row">
 						<div class="col-md-6  " style="margin-bottom:10px;">
-							<div class="col-md-12 Available-balance text-center">
+							<div class="col-md-12 Available-balance text-center"  >
 								<h1>Available Balance</h1>
 								<h2><b>P89,406.00</b></h2>
 								<div class="d-flex text-center income-and-spendings-container">
@@ -108,91 +159,129 @@ session_start();
 						<div class="col-md-6  " >
 							<div class="col-md-12 Available-balance text-center " style="margin-bottom:10px;">
 								<h1>Your Goal</h1>
-								<h2><b>P30,000.00</b></h2>
-								<button class="goal-button text-center ">For retirement | Switch Planner</button>
+								<h2 style="font-size:20px;"><b>Saving Little by Little</b></h2>
+								<form  method="post">
+									<input type="Planner" placeholder="For Retirement "name="Retirement" id="Retire">
+									<input type="Planner" placeholder="For House & Lot "name="HouseandLot" >
+									<input type="Planner" placeholder="For Vehicle "name="Vehicle" >
+									<input type="submit"class="goal-button text-center " style="margin-bottom:15px; margin-top:8px; width:500px padding:5px;"  name="Submit"class="button" value="Submit" /> 
+
+								</form>
+								
+
 							</div>
 						</div>
+						
 					</div>
 					<div class="row" style="margin-top:15px;">
-						<div class="col-md-12 spending-limit">
-							<h1>Spending Limit</h1>
+						<div class="col-md-12 spending-limit" style="padding:5px; ">
+							<h1 style="padding:5px; font-size:12px;">Spending Limit</h1>
 							<h2><b>P 10,594.00</b> used from <b>P100,000.00</b></h2>
 						</div>
-					</div>
+		</div>
 				</div>
+				
 			</div>
 		</div>
+		<div class="container">
+			<div class="col-md-6 Available-balance"style="margin-bottom:10px"   >
+				<h1>Planner</h1>
+				<div id="chartCont" style="height: 370px; width: 100%; margin-top:5%;" ></div>
+
+			</div>
+			
+			<div class="col-md-5 Available-balance" style="margin-left:10px;margin-bottom:10px"  >
+				<div class="deposit-history">
+				<h1> Spendings </h1>
+			</div>
+			<div class="deposit-record">
+				<table class="table table-responsive-md deposit">
+					<tbody>
+						<tr>
+						  <th scope="col">Type</th>
+						  <th scope="col">Date</th>
+						  <th scope="col">Amount</th>
+						</tr>
+						<tr>
+							<td scope="row">House</td>
+							<td>11-09-03</td>
+							<td>P550.21</td> 
+						</tr>
+						<tr>
+							<td scope="row">Transportation</td>
+							<td>10-12-03</td>
+							<td>P1500.00</td> 
+						</tr>
+						<tr>
+							<td scope="row">Entertainment</td>
+							<td>9-015-03</td>
+							<td>P900.21</td> 
+						</tr>
+						<tr>
+							<td scope="row">Food</td>
+							<td>8-23-03</td>
+							<td>P11000.00</td> 
+						</tr>
+						<tr>
+							<td scope="row">Pet</td>
+							<td>7-16-03</td>
+							<td>P300.00</td> 
+						</tr>
+						<tr>
+							<td scope="row">Clothing</td>
+							<td>7-2-03</td>
+							<td>P300.00</td> 
+						</tr>
+						<tr>
+							<td scope="row">HealthCare</td>
+							<td>7-30-03</td>
+							<td>P500.00</td> 
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</div>
+		</div>
+		
 	</div>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+ <script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	exportEnabled: false,
+	theme: "light1", 
+	title:{
+		text: "Dashboard"
+	},
+	data: [{
+		type: "pie",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+	
+});
+var charts = new CanvasJS.Chart("chartCont", {
+	animationEnabled: true,
+	exportEnabled: false,
+	theme: "light2", 
+	title:{
+		text: "Planner"
+	},
+	data: [{
+		type: "bar", 
+		dataPoints: <?php echo json_encode($Data, JSON_NUMERIC_CHECK); ?>
+	}]
+	
+});
+charts.render();
+chart.render();
+ 
+}
+</script>
+   
 
-	<script>
-			var xValues = ['House','healthcare','Clothing','Entertainment','Food','Grocery','Pet','Transportation'];
-			var yValues = [50,50,50,50,50,50,50,50,];
-			var barColors = ['yellow','orange','red','blue','violet','green','pink','gray'];
-
-			new Chart("dashboard", {
-			  type: "doughnut",
-			  data: {
-				labels: xValues,
-				datasets: [{
-				  backgroundColor: barColors,
-				  data: yValues
-				}]
-			  },
-			  options: {
-				title: {
-				  display: true,
-				  text: ""
-				},
-				plugins: {
-				  labels: {
-					render: 'image',
-					images: [
-					  {
-						src: 'Images/planner/house.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/healthcare.png',
-						width: 30,
-						height: 30
-					  },
-					  {
-						src: 'Images/planner/clothing.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/entertainment.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/food.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/grocery.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/pet.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/transportation.png',
-						width: 30,
-						height: 30, 
-					  },
-					]
-					}
-					}
-			  }
-			});
-	</script>
+	
 
 	
 	  
@@ -206,274 +295,10 @@ session_start();
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
     integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
     crossorigin="anonymous"></script>
-  <script>
+  
 
-    var usernameElement = document.getElementById('username-greetings')
-
-    const totalAvailableBalanceElement = document.getElementById("total-available-balance");
-    const totalIncomeElement = document.getElementById("total-income");
-    const totalSpendingsElement = document.getElementById("total-spendings");
-    const totalGoalElement = document.getElementById("total-goal");
-    const totalSpendingLimitElement = document.getElementById("spending-limit");
-
-    const retirementProgressBar = document.getElementById('planner-retirement-progress-bar');
-    const plannerRetirementDepositedElement = document.getElementById('planner-retirement-deposited')
-    const plannerRetirementTargetElement = document.getElementById('planner-retirement-target');
-    const vehicleProgressBar = document.getElementById('planner-vehicle-progress-bar');
-    const plannerVehicleDepositedElement = document.getElementById('planner-vehicle-deposited')
-    const plannerVehicleTargetElement = document.getElementById('planner-vehicle-target');
-    const houseAndLotProgressBar = document.getElementById('planner-house-and-lot-progress-bar')
-    const plannerHouseAndLotDepositedElement = document.getElementById('planner-house-and-lot-deposited');
-    const plannerHouseAndLotTargetElement = document.getElementById('planner-house-and-lot-target');
-
-    const spendingsHouseElement = document.getElementById('spendings-house');
-    const spendingsTransportationElement = document.getElementById('spendings-transportation');
-    const spendingsEntertainmentElement = document.getElementById('spendings-entertainment');
-    const spendingsGroceryElement = document.getElementById('spendings-grocery');
-    const spendingsFoodElement = document.getElementById('spendings-food');
-    const spendingsPetElement = document.getElementById('spendings-pet');
-    const spendingsHealthcareElement = document.getElementById('spendings-healthcare')
-    const spendingsClothingElement = document.getElementById('spendings-clothing');
-
-    var username = "Username";
-
-    var totalIncome = 100000.00;
-    var totalSpendings = 10594.00;
-    var totalAvailableBalance = totalIncome - totalSpendings;
-    var totalGoal = 30000.00;
-
-    var spendingLimitSolution = parseFloat(Math.round((totalSpendings / totalIncome) * 100));
-    var spendingLimitTotal = spendingLimitSolution;
-    UpdatedSpendingLimitProgressBar(spendingLimitTotal);
-
-
-    var plannerRetirementTarget = 30000000;
-    var plannerRetirementDeposited = 2000000;
-    var plannerRetirementSolution = parseFloat(Math.round((plannerRetirementDeposited / plannerRetirementTarget) * 100));
-    var plannerRetirementTotal = plannerRetirementSolution;
-    UpdatedPlannerRetirementProgressBar(plannerRetirementTotal);
-
-    var plannerVehicleTarget = 3000000;
-    var plannerVehicleDeposited = 1500000;
-    var plannerVehicleSolution = parseFloat(Math.round((plannerVehicleDeposited / plannerVehicleTarget) * 100));
-    var plannerVehicleTotal = plannerVehicleSolution;
-    UpdatedPlannerVehicleProgressBar(plannerVehicleTotal);
-
-    var plannerHouseAndLotTarget = 10000000;
-    var plannerHouseAndLotDeposited = 2500000;
-    var plannerHouseAndLotSolution = parseFloat(Math.round((plannerHouseAndLotDeposited / plannerHouseAndLotTarget) * 100));
-    var plannerHouseAndLotTotal = plannerHouseAndLotSolution;
-    UpdatedPlannerHouseAndLotProgressBar(plannerHouseAndLotTotal);
-
-    var spendingsHouse = 2000;
-    var spendingsTransportation = 2000;
-    var spendingsEntertainment = 2000;
-    var spendingsGrocery = 2000;
-    var spendingsFood = 2000;
-    var spendingsPet = 2000;
-    var spendingsHealthcare = 2000;
-    var spendingsClothing = 2000;
-
-    var formattedTotalIncome = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(totalIncome);
-
-    var formattedTotalSpendings = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(totalSpendings);
-
-    var formattedTotalAvailableBalance = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(totalAvailableBalance);
-
-    var formattedTotalGoal = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(totalGoal);
-
-    var formattedPlannerRetirementDeposited = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(plannerRetirementDeposited);
-
-    var formattedPlannerRetirementTarget = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(plannerRetirementTarget);
-
-    var formattedPlannerRetirementTarget = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(plannerRetirementTarget);
-
-    var spendingsTotal = ((totalSpendings / totalIncome)) * 100;
-    var spendingLimitElement = document.getElementById("progress");
-    spendingLimitElement.style.width = spendingsTotal + "%";
-
-    function PlannerRetirementProgressBar(retirement) {
-      retirementProgressBar.style.width = retirement + '%';
-      retirementProgressBar.innerHTML = "";
-    }
-
-    function UpdatedPlannerRetirementProgressBar(plannerRetirement) {
-      if (plannerRetirement >= 0 && plannerRetirement <= 100) {
-        PlannerRetirementProgressBar(plannerRetirement);
-      } else {
-        console.error('Input value between 0 and 100.');
-      }
-    }
-
-    var formattedPlannerVehicleDeposited = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(plannerVehicleDeposited);
-
-    var formattedPlannerVehicleTarget = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(plannerVehicleTarget);
-
-    var formattedSpendingsHouse = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(spendingsHouse);
-
-    var formattedSpendingsTransportation = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(spendingsTransportation);
-
-    var formattedSpendingsEntertainment = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(spendingsEntertainment);
-
-    var formattedSpendingsGrocery = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(spendingsGrocery);
-
-    var formattedSpendingsFood = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(spendingsFood);
-
-    var formattedSpendingsPet = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(spendingsPet);
-
-    var formattedSpendingsHealthcare = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(spendingsHealthcare);
-
-    var formattedSpendingsClothing = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(spendingsClothing);
-
-    function PlannerVehicleProgressBar(vehicle) {
-      vehicleProgressBar.style.width = vehicle + '%';
-      vehicleProgressBar.innerHTML = "";
-    }
-
-    function UpdatedPlannerVehicleProgressBar(plannerVehicle) {
-      if (plannerVehicle >= 0 && plannerVehicle <= 100) {
-        PlannerVehicleProgressBar(plannerVehicle);
-      } else {
-        console.error('Input value between 0 and 100.');
-      }
-    }
-
-    var formattedPlannerHouseAndLotDeposited = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(plannerHouseAndLotDeposited);
-
-    var formattedPlannerHouseAndLotTarget = new Intl.NumberFormat('fil-PH', {
-      currency: 'PHP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(plannerHouseAndLotTarget);
-
-    function PlannerHouseAndLotProgressBar(houseAndLot) {
-      houseAndLotProgressBar.style.width = houseAndLot + '%';
-      houseAndLotProgressBar.innerHTML = "";
-    }
-
-    function UpdatedPlannerHouseAndLotProgressBar(plannerHouseAndLot) {
-      if (plannerHouseAndLot >= 0 && plannerHouseAndLot <= 100) {
-        PlannerHouseAndLotProgressBar(plannerHouseAndLot);
-      } else {
-        console.error('Input value between 0 and 100.');
-      }
-    }
-
-    function SpendingLimitProgressBar(spendingLimit) {
-      houseAndLotProgressBar.style.width = spendingLimit + '%';
-      houseAndLotProgressBar.innerHTML = "";
-    }
-
-    function UpdatedSpendingLimitProgressBar(spendingLimit) {
-      if (spendingLimit >= 0 && spendingLimit <= 100) {
-        SpendingLimitProgressBar(spendingLimit);
-      } else {
-        console.error('Input value between 0 and 100.');
-      }
-    }
-
-    usernameElement.textContent = "Welcome Back, " + username + "!";
-
-    totalIncomeElement.textContent = "P" + formattedTotalIncome;
-    totalSpendingsElement.textContent = "P" + formattedTotalSpendings;
-    totalGoalElement.textContent = "P" + formattedTotalGoal;
-    totalAvailableBalanceElement.textContent = "P" + formattedTotalAvailableBalance;
-    totalSpendingLimitElement.textContent = `P ${formattedTotalSpendings} used from P${formattedTotalIncome}`
-
-    plannerRetirementDepositedElement.textContent = "P" + formattedPlannerRetirementDeposited;
-    plannerRetirementTargetElement.textContent = "Target: P" + formattedPlannerRetirementTarget;
-
-    plannerVehicleDepositedElement.textContent = "P" + formattedPlannerVehicleDeposited;
-    plannerVehicleTargetElement.textContent = "Target: P" + formattedPlannerVehicleTarget;
-
-    plannerHouseAndLotDepositedElement.textContent = "P" + formattedPlannerHouseAndLotDeposited;
-    plannerHouseAndLotTargetElement.textContent = "Target: P" + formattedPlannerHouseAndLotTarget;
-
-    spendingsHouseElement.textContent = "P" + formattedSpendingsHouse;
-    spendingsTransportationElement.textContent = "P" + formattedSpendingsTransportation;
-    spendingsEntertainmentElement.textContent = "P" + formattedSpendingsEntertainment;
-    spendingsGroceryElement.textContent = "P" + formattedSpendingsGrocery;
-    spendingsFoodElement.textContent = "P" + formattedSpendingsFood;
-    spendingsPetElement.textContent = "P" + formattedSpendingsPet;
-    spendingsHealthcareElement.textContent = "P" + formattedSpendingsHealthcare;
-    spendingsClothingElement.textContent = "P" + formattedSpendingsClothing;
-
-  </script>
-
-    <div id="popupForm" class="popup">
-        <form class="form-container">
+    <div id="popupForm" class="popup" >
+        <form class="form-container" >
           <h3><img class="back-arrow" src="Images/back-arrow.png" id="closePopupBtn" onclick="closeForm()">New Expense</h3>
             <label for="source">Enter the Amount:</label><br>
             <input type="text" class="calculator-screen">
@@ -648,7 +473,17 @@ document.getElementById('openPopupBtn').addEventListener('click', function() {
 document.getElementById('closePopupBtn').addEventListener('click', function() {
     document.getElementById('popupForm').style.display = 'none';
 });
+
+document.getElementById('Planner').addEventListener('click', function() {
+    document.getElementById('Planner').style.display = 'none';
+	document.getElementById('Planner_Input').style.display = 'block';
+});
+
+document.getElementById('closePopupBtn').addEventListener('click', function() {
+    document.getElementById('popupForm').style.display = 'none';
+});
 </script>
+
 
 </body>
   <footer >

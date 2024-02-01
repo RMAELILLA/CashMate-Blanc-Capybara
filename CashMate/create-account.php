@@ -5,7 +5,6 @@ include("connection.php");
 include("functions.php");
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // something was posted
     $f_name = mysqli_real_escape_string($con, $_POST['f_name']);
     $l_name = mysqli_real_escape_string($con, $_POST['l_name']);
     $user_name = mysqli_real_escape_string($con, $_POST['user_name']);
@@ -50,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 	<style>
-		/* Add your existing styles here */
 		.notification-popup {
 			display: none;
 			position: fixed;
@@ -139,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         </div>
                     </div>
                     <div class="row" id="line-one">
-                        <div class="col-md-1">
+                        <div class="col-md-1" style="padding-top:2%;">
                             <input type="checkbox" name="term" required>
                         </div>
                         <div class="col-md-11" id="terms">

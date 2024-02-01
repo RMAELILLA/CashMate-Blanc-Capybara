@@ -158,11 +158,11 @@
 				</div>
 				<div class="col-md-9 collapse navbar-collapse navbar-right"id="drop-img">
 					<ul class="nav navbar-nav "  >
-						<li ><a href="Dashboard.html" class="link">Dashboard</a></li>
-						<li><a href="Income page.html" class="link">Income</a></li>
+						<li ><a href="Dashboard.php" class="link">Dashboard</a></li>
+						<li><a href="Income page.php" class="link">Income</a></li>
 						<li><a href="Spendings.html" class="link">Spendings</a></li>
 						<li ><a href="Cards.html">Cards</a></li>
-						<li ><a href="Planner.html" class="link">Planner</a></li> 
+						<li ><a href="Planner.php" class="link">Planner</a></li> 
 						<li ><a href="get-help.html" class="link"><img src="Images/question.png"></a></li> 
 						<li ><a href="account-settings.html" class="link"><img src="Images/settings.png"></a></li> 
 						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
@@ -170,7 +170,7 @@
 							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
 							<p style="margin-left:60;margin-right:60;">Username</p>
 							<p >Username@example.com</p>
-							<p style="margin-left:60;margin-right:60;" ><a href="login-page.html" onclick="signOut()">Sign-out</a></p>
+							<p style="margin-left:60;margin-right:60;" ><a href="login-page.php" onclick="signOut()">Sign-out</a></p>
 						  </ul>
 						</li> 
 					</ul>
@@ -278,8 +278,6 @@
                             <span style="font-size: 12px; color: #666;">(Exclusive promotions and discounts)</span>
                         </label>
 
-                        <!-- Add more options as needed -->
-
                         <button type="submit">Save Settings</button>
                     </form>
                 </div>
@@ -288,13 +286,12 @@
     </div>
 
     <script>
-            // Update Profile Photo
+        // Update Profile Photo
         document.addEventListener('DOMContentLoaded', function () {
         const fileInput = document.querySelector('input[name="profile-photo"]');
         const labelUploadPhoto = document.querySelector('.label-upload-photo');
         const profilePhoto = document.querySelector('.username-pic img');
 
-        // Update Profile Photo
         fileInput.addEventListener('change', function (event) {
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
@@ -305,12 +302,10 @@
 
                 reader.readAsDataURL(fileInput.files[0]);
 
-                // Update label text when a file is selected
                 labelUploadPhoto.textContent = 'Change Profile Photo';
             }
         });
 
-        // Reset label text when the file input is cleared
         fileInput.addEventListener('click', function () {
             this.value = null;
             labelUploadPhoto.textContent = 'Update Profile Photo';
@@ -339,7 +334,6 @@
             // Update Password
             document.querySelector('#update-password-btn').addEventListener('click', function () {
                 const currentPassword = prompt('Enter current password:');
-                // Simulate password update on the server (replace with actual server-side logic)
                 if (currentPassword !== null && currentPassword !== '') {
                     alert('Password updated successfully!');
                 } else {
@@ -352,14 +346,12 @@
                 const confirmDelete = confirm('Are you sure you want to delete your account?');
     
                 if (confirmDelete) {
-                    // Simulate account deletion on the server (replace with actual server-side logic)
                     alert('Account deleted successfully!');
                 }
             });
     
             // Sign Out
             document.querySelector('#sign-out-btn').addEventListener('click', function () {
-                // Simulate sign out (replace with actual sign-out logic)
                 alert('Signed out successfully!');
             });
         });

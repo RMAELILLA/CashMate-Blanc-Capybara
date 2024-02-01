@@ -1,3 +1,49 @@
+<?php
+session_start();
+
+include("connection.php");
+include("functions.php");
+
+    // Get user data using check_login function
+$user_data = check_login($con);
+
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    // Something was posted
+    $source = mysqli_real_escape_string($con, $_POST['source']);
+    $categ = mysqli_real_escape_string($con, $_POST['category']);
+    $amount = mysqli_real_escape_string($con, $_POST['amount']);
+    $date = mysqli_real_escape_string($con, $_POST['date']);
+
+    // Use prepared statement to prevent SQL injection
+    $insert = $con->prepare("INSERT INTO income (user_name, source, categ, amount, date) VALUES (?, ?, ?, ?, ?)");
+    $insert->bind_param("sssss", $user_data['user_name'], $source, $categ, $amount, $date);
+
+		if ($insert->execute()) {
+			// Record inserted successfully, now redirect to avoid form resubmission
+			header("Location: " . $_SERVER['REQUEST_URI']);
+			exit();
+		} else {
+			echo "Error: " . $insert->error;
+		}
+
+	$insert->close();
+}
+
+$sql = "SELECT * FROM income WHERE user_name = '" . $user_data['user_name'] . "' ORDER BY date DESC LIMIT 8";
+$result = mysqli_query($con, $sql);
+	
+	// Store the results in an array
+$incomeData = [];
+while ($row = mysqli_fetch_assoc($result)) {
+		$incomeData[] = $row;
+}
+?>
+
+
+
+
+
 <html lang="en">
   <head>
     <head>
@@ -32,11 +78,10 @@
 				</div>
 				<div class="col-md-9 collapse navbar-collapse navbar-right" id="drop-img">
 					<ul class="nav navbar-nav "  >
-						<li ><a href="Dashboard.html" class="link">Dashboard</a></li>
-						<li><a href="Income page.html" class="link">Income</a></li>
+						<li ><a href="Dashboard.php" class="link">Dashboard</a></li>
+						<li><a href="Income-page.php" class="link">Income</a></li>
 						<li><a href="Spendings.html" class="link">Spendings</a></li>
-						<li ><a href="Cards.html">Cards</a></li>
-						<li ><a href="Planner.html" class="link">Planner</a></li> 
+						<li ><a href="Planner.php" class="link">Planner</a></li> 
 						<li ><a href="get-help.html" class="link"><img src="Images/question.png"></a></li> 
 						<li ><a href="account-settings.html" class="link"><img src="Images/settings.png"></a></li> 
 						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
@@ -44,18 +89,15 @@
 							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
 							<p style="margin-left:60;margin-right:60;">Username</p>
 							<p >Username@example.com</p>
-							<p style="margin-left:60;margin-right:60;" ><a href="login-page.html" onclick="signOut()">Sign-out</a></p>
+							<p style="margin-left:60;margin-right:60;" ><a href="login-page.php" onclick="signOut()">Sign-out</a></p>
 						  </ul>
 						</li> 
-					 </ul>
-					 
+					 </ul> 
 				</div>
 		</div>
 	</nav>
 	<script>
-    // JavaScript for handling sign-out
     function signOut() {
-      // You can add additional logic here, such as clearing user session
       alert('Signing out...');
     }
   </script>
@@ -70,105 +112,46 @@
 						<h1>Income</h1>
 					</div>
 					<div class="col-md-1">
-						<button id="openPopupBtn"><img class="s2--add-button" src="Images/add-button.png" alt="Open Form"></button>
+						<button id="openPopupBtn"><img class="s2--add-button" src="Images/add-button.png" alt="Open Form"></button> 
 					</div>
 				</div>
-				<div class="row section2--rect" style="margin:10px;"> 
-					<div class="col-md-1 s2--income-img" >
-						<img src="Images/income-bag.png" alt="income-bag">
-					</div>
-					<div class="col-md-10">
-						<div class="col-md-9 text-left">
-							<p class="s2--desc-title">Accenture</p>
-							<p class="s2--desc-categ">Employment</p>
-						</div>
-						<div class="col-md-3 text-left">
-							<p class="s2--desc-date">October 30
-							<p class="s2--desc-amount">P50,000
-						</div>
+				<?php foreach ($incomeData as $income) : ?>
+        <div class="row section2--rect" style="margin:10px;">
+            <div class="col-md-1 s2--income-img">
+                <img src="Images/income-bag.png" alt="income-bag">
+            </div>
+            <div class="col-md-10">
+                <div class="col-md-9 text-left">
+                    <p class="s2--desc-title"><?php echo $income['source']; ?></p>
+                    <p class="s2--desc-categ"><?php echo $income['categ']; ?></p>
+                </div>
+                <div class="col-md-3 text-left">
+                    <p class="s2--desc-date"><?php echo $income['date']; ?></p>
+                    <p class="s2--desc-amount"><?php echo "P" .number_format($income['amount'],); ?></p>
+                </div>
+            </div>
+        </div>
+   	 		<?php endforeach; ?>
 
-					</div>
-					 
-				</div>
-				<div class="row section2--rect " style="margin:10px;"> 
-					<div class="col-md-1 s2--income-img" >
-						<img class="s2--income-img" src="Images/income-hand.png" alt="income-bag">
-					</div>
-					<div class="col-md-10">
-						<div class="col-md-9 text-left">
-							<p class="s2--desc-title">Beauty Havens</p>
-							<p class="s2--desc-categ">Bussiness</p>
-						</div>
-						<div class="col-md-3 text-left">
-							<p class="s2--desc-date">October 22</p>
-							<p class="s2--desc-amount">P40,000</p>
-						</div>
-					</div>
-				</div>
-				<div class="row section2--rect " style="margin:10px;"> 
-					<div class="col-md-1 s2--income-img" >
-						<img class="s2--income-img" src="Images/income-bag.png" alt="income-bag">
-					</div>
-					<div class="col-md-10">
-						<div class="col-md-9 text-left">
-							<p class="s2--desc-title">Accenture</p>
-							<p class="s2--desc-categ">Employment</p>
-						</div>
-						<div class="col-md-3 text-left">
-							<p class="s2--desc-date">October 15</p>
-						<p class="s2--desc-amount">P50,000</p>
-						</div>
-					</div>
-				</div>
-				<div class="row section2--rect " style="margin:10px;"> 
-					<div class="col-md-1 s2--income-img" >
-						<img class="s2--income-img" src="Images/income-hand.png" alt="income-bag">
-					</div>
-					<div class="col-md-10">
-						<div class="col-md-9 text-left">
-							<p class="s2--desc-title">Beauty Havens</p>
-							<p class="s2--desc-categ">Bussiness</p>
-						</div>
-						<div class="col-md-3 text-left">
-							<p class="s2--desc-date">October 07</p>
-							<p class="s2--desc-amount">P32,000</p>
-						</div>
-					</div>
-				</div>
-				<div class="row section2--rect " style="margin:10px;">  
-					<div class="col-md-1 s2--income-img" >
-						<img class="s2--income-img" src="Images/income-bag.png" alt="income-bag">
-					</div>
-					<div class="col-md-10">
-						<div class="col-md-9 text-left">
-							<p class="s2--desc-title">Others</p>
-							<p class="s2--desc-categ">Side Hustle</p>
-						</div>
-						<div class="col-md-3 text-left">
-							<p class="s2--desc-date">September 30</p>
-							<p class="s2--desc-amount">P50,000</p>
-						</div>
-					</div>
-			</div>
 			</div>
 			<div class="col-md-4 Computed-Income text-center" style="margin-left:50px;">
 				<h1>Computed Income</h1> 
 				<div class="section3 text-center">
-					<h1>P 172,000</h1>
+        	<h1>P <?php echo number_format(get_total_income($con, $user_data['user_name']), 2); ?></h1>
 					<p >Updated approximately<br>every 7 days.<br>Record shows only the past<br>4 weeks.</p>
-					<button>Deposit to Planner</button>
+					<button><a href="income-history.php" style="color:#000000;font-family: 'Lexend', sans-serif;">Display Income History</a></button>
 				</div>
 			</div>
 			
 		</div>
 		<div id="popupForm" class="popup">
-            <form class="form-container">
+            <form class="form-container" method="POST">
               <h3>New Income</h3>
                 <label for="source">Income Source:</label><br>
                 <input type="text" placeholder="Enter Company/Business Name" name="source" required><br>
     
                 <label for="category">Income Category:</label><br>
-                <input type="category" placeholder="Employment, Business, Etc." name="category" required><br>
+                <input type="text" placeholder="Employment, Business, Etc." name="category" required><br>
 
                 <label for="date">Date:</label><br>
                 <input type="date" placeholder="January 12" name="date" required><br>
@@ -183,7 +166,7 @@
 	</div>
 	<script src="income-page-js.js"></script>
   </body>
-    <footer >
+    <footer>
 	<div class="container-fluid">
 		<div class="row" id="footer">
 			<div class="col-md-8">
