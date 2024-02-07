@@ -1,3 +1,14 @@
+<?php 
+session_start();
+
+	include("connection.php");
+	include("functions.php");
+
+	$user_data = check_login($con);
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -104,16 +115,16 @@
 					<ul class="nav navbar-nav "  >
 						<li ><a href="Dashboard.php" class="link">Dashboard</a></li>
 						<li><a href="Income-page.php" class="link">Income</a></li>
-						<li><a href="Spendings.html" class="link">Spendings</a></li>
+						<li><a href="Spendings.php" class="link">Spendings</a></li>
 						<li ><a href="Planner.php" class="link">Planner</a></li> 
-						<li ><a href="get-help.html" class="link"><img src="Images/question.png"></a></li> 
-						<li ><a href="account-settings.html" class="link"><img src="Images/settings.png"></a></li> 
+						<li ><a href="get-help.php" class="link"><img src="Images/question.png"></a></li> 
+						<li ><a href="account-settings.php" class="link"><img src="Images/settings.png"></a></li> 
 						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
 						  <ul class="dropdown-menu" style="background-color:rgb(140,195,126);">
 							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
-							<p style="margin-left:60;margin-right:60;">Username</p>
-							<p >Username@example.com</p>
-							<p style="margin-left:60;margin-right:60;" ><a href="login-page.php" onclick="signOut()">Sign-out</a></p>
+							<p style="margin-left:60;margin-right:60;"><?php echo $user_data['user_name'] ?></p>
+							<p ><?php echo $user_data['email'] ?></p>
+							<p style="margin-left:60;margin-right:60;" ><a href="logout.php" onclick="signOut()">Sign-out</a></p>
 						  </ul>
 						</li> 
 					 </ul> 
@@ -137,11 +148,11 @@
                     <h2>Getting Started</h2>
 
                     <h3>Creating an Account</h3>
-                    <p>To initiate CashMate journey, click the <a href="create-account.html" class="link">"Sign Up"</a> button.<br>
+                    <p>To initiate CashMate journey, click the <a href="create-account.php" class="link">"Sign Up"</a> button.<br>
                     Fill in the required details, such as your name, email, and password, to create your account</p>
                     
                     <h3>Logging In</h3>
-                    <p>Returning users can click the <a href="login-page.html" class="link">"Log In"</a>button.</p>
+                    <p>Returning users can click the <a href="login-page.php" class="link">"Log In"</a>button.</p>
 
                     <h3>Navigating the Dashboard</h3>
                     <p>Upon login, you'll land on your dashboard. Here, discover different sections/categories. Use the headbar menu to explore specific areas of interest.</p>
@@ -151,14 +162,14 @@
 
                     <h3>Profile Management</h3>
                     <h3>Edit Profile:</h3>
-                    <p>Navigate to the <a href="account-settings.html" class="link">Profile</a> section to update personal information, change profile pictures, etc.</p>
+                    <p>Navigate to the <a href="account-settings.php" class="link">Profile</a> section to update personal information, change profile pictures, etc.</p>
 
                     <h3>Account Settings:</h3>
                     <p>Manage account, preferences, privacy settings, and notifications</p>
 
                     <h3>About Website</h3>
                     <h3>Introduction:</h3>
-                    <p><a href="get-help.html" class="link">Learn more</a> about are website and its core functionalities</p>
+                    <p><a href="get-help.php" class="link">Learn more</a> about are website and its core functionalities</p>
                 </div>
                 <div class="faqs">
                     <h2>Frequently Asked Questions (FAQs)</h2>
@@ -179,7 +190,7 @@
                     <p>Yes, CashMate provides real-time updates on transactions and expenses, ensuring users have the most current financial information.</p>
 
                     <h3>How can I get started with CashMate?</h3>
-                    <p>To begin using CashMate, <a href="create-account.html" class="link">"Sign Up"</a> on our website, link your financial accounts, and start tracking expenses and savings today!</p>
+                    <p>To begin using CashMate, <a href="create-account.php" class="link">"Sign Up"</a> on our website, link your financial accounts, and start tracking expenses and savings today!</p>
                 </div>
                 <div class="troubleshoot">
                     <h2>Troubleshooting</h2>
@@ -299,7 +310,7 @@
             </div>
             <div class="col-md-6">
                 <div class="footer-2clmn2">
-                    <p><a href="terms-conditions.html">Terms of Use </a>|<a href="privacy-policy.html"> Privacy Policy </a>|<a href="sitemap.html"> Site Map </a>|</p>
+                    <p><a href="terms-conditions.php">Terms of Use </a>|<a href="privacy-policy.php"> Privacy Policy </a>|<a href="sitemap.php"> Site Map </a>|</p>
                 </div>
             </div>
         </div>

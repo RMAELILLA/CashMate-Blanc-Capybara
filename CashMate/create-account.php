@@ -142,8 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         </div>
                         <div class="col-md-11" id="terms">
                             <label>Creating an account means you're okay with our
-                                <a href="terms-conditions.html">Terms of Services</a>,
-                                <a href="privacy-policy.html">Privacy Policy</a> and our default
+                                <a href="terms-conditions.php">Terms of Services</a>,
+                                <a href="privacy-policy.php">Privacy Policy</a> and our default
                                 <a href="#" onclick="showNotificationPopup()">Notification Settings</a>.
                             </label>
                         </div>

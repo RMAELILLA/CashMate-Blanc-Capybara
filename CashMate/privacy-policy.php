@@ -1,3 +1,16 @@
+<?php 
+session_start();
+
+	include("connection.php");
+	include("functions.php");
+
+	$user_data = check_login($con);
+
+?>
+
+
+<!DOCTYPE html>
+
 <html lang="en">
   <head>
     <head>
@@ -33,16 +46,16 @@
 					<ul class="nav navbar-nav "  >
 						<li ><a href="Dashboard.php" class="link">Dashboard</a></li>
 						<li><a href="Income-page.php" class="link">Income</a></li>
-						<li><a href="Spendings.html" class="link">Spendings</a></li>
+						<li><a href="Spendings.php" class="link">Spendings</a></li>
 						<li ><a href="Planner.php" class="link">Planner</a></li> 
-						<li ><a href="get-help.html" class="link"><img src="Images/question.png"></a></li> 
-						<li ><a href="account-settings.html" class="link"><img src="Images/settings.png"></a></li> 
+						<li ><a href="get-help.php" class="link"><img src="Images/question.png"></a></li> 
+						<li ><a href="account-settings.php" class="link"><img src="Images/settings.png"></a></li> 
 						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
 						  <ul class="dropdown-menu" style="background-color:rgb(140,195,126);">
 							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
-							<p style="margin-left:60;margin-right:60;">Username</p>
-							<p >Username@example.com</p>
-							<p style="margin-left:60;margin-right:60;" ><a href="login-page.php" onclick="signOut()">Sign-out</a></p>
+							<p style="margin-left:60;margin-right:60;"><?php echo $user_data['user_name'] ?></p>
+							<p ><?php echo $user_data['email'] ?></p>
+							<p style="margin-left:60;margin-right:60;" ><a href="logout.php" onclick="signOut()">Sign-out</a></p>
 						  </ul>
 						</li> 
 					 </ul> 
@@ -125,7 +138,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="footer-2clmn2">
-				<p><a href="terms-conditions.html">Terms of Use </a>|<a href="privacy-policy.html"> Privacy Policy </a>|<a href="sitemap.html"> Site Map </a>|</p>
+				<p><a href="terms-conditions.php">Terms of Use </a>|<a href="privacy-policy.php"> Privacy Policy </a>|<a href="sitemap.php"> Site Map </a>|</p>
 			</div>
 		</div>
 	</div>

@@ -1,3 +1,14 @@
+<?php 
+session_start();
+
+	include("connection.php");
+	include("functions.php");
+
+	$user_data = check_login($con);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,17 +171,16 @@
 					<ul class="nav navbar-nav "  >
 						<li ><a href="Dashboard.php" class="link">Dashboard</a></li>
 						<li><a href="Income page.php" class="link">Income</a></li>
-						<li><a href="Spendings.html" class="link">Spendings</a></li>
-						<li ><a href="Cards.html">Cards</a></li>
+						<li><a href="Spendings.php" class="link">Spendings</a></li>
 						<li ><a href="Planner.php" class="link">Planner</a></li> 
-						<li ><a href="get-help.html" class="link"><img src="Images/question.png"></a></li> 
-						<li ><a href="account-settings.html" class="link"><img src="Images/settings.png"></a></li> 
+						<li ><a href="get-help.php" class="link"><img src="Images/question.png"></a></li> 
+						<li ><a href="account-settings.php" class="link"><img src="Images/settings.png"></a></li> 
 						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
 						  <ul class="dropdown-menu" style="background-color:rgb(140,195,126);">
 							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
-							<p style="margin-left:60;margin-right:60;">Username</p>
-							<p >Username@example.com</p>
-							<p style="margin-left:60;margin-right:60;" ><a href="login-page.php" onclick="signOut()">Sign-out</a></p>
+							<p style="margin-left:60;margin-right:60;"><?php echo $user_data['user_name'] ?></p>
+							<p><?php echo $user_data['email'] ?></p>
+							<p style="margin-left:60;margin-right:60;" ><a href="logout.php" onclick="signOut()">Sign-out</a></p>
 						  </ul>
 						</li> 
 					</ul>
@@ -185,22 +195,22 @@
                 <div class="username-pic">
                     <img src="Images/profile photo icon.png" height="70" width="70">
                     <div class="user">
-                        <span class="username-label"><b>Username</b></span>
-                        <label id="email"><b>username@example.com</b></label>
+                        <span class="username-label"><b><?php echo $user_data['user_name'] ?></b></span>
+                        <label id="email"><b><?php echo $user_data['email'] ?></b></label>
                     </div>
                 </div>
             </div>
             <div class="list-group list-group-flush account-settings-links">
                 <a class="list-group-item list-group-item-action active" data-toggle="list"
-                    href="account-settings.html">Account Settings</a>
+                    href="account-settings.php">Account Settings</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list"
-                    href="get-help.html">Get Help</a>
+                    href="get-help.php">Get Help</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list"
-                    href="privacy-policy.html">Privacy Policy</a>
+                    href="privacy-policy.php">Privacy Policy</a>
                 <a class="list-group-item list-group-item-action" data-toggle="modal"
                     href="#notificationSettings">Notification Settings</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list"
-                    href="login-page.html">Sign out</a>
+                    href="logout.php">Sign out</a>
             </div>
         </div>
 
@@ -217,12 +227,12 @@
                         <div class="form-group">
                             <label class="form-label">Name</label>
                             <button type="button">EDIT</button>
-                            <p><b>Juan Dela Cruz</b></p>
+                            <p><b><?php echo $user_data['f_name'], $user_data['l_name'] ?></b></p>
                         </div>
                         <div class="form-group">
                             <label class="form-label">E-mail Address</label>
                             <button type="button">EDIT</button>
-                            <p id="email"><b>username@example.com</b></p>
+                            <p id="email"><b><?php echo $user_data['email'] ?></b></p>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Password</label>
@@ -387,7 +397,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="footer-2clmn2">
-				<p><a href="terms-conditions.html">Terms of Use </a>|<a href="privacy-policy.html"> Privacy Policy </a>|<a href="sitemap.html"> Site Map </a>|</p>
+				<p><a href="terms-conditions.php">Terms of Use </a>|<a href="privacy-policy.php"> Privacy Policy </a>|<a href="sitemap.php"> Site Map </a>|</p>
 			</div>
 		</div>
 	</div>
