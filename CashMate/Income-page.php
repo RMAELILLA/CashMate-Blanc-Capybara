@@ -187,7 +187,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 			<div class="col-md-4">
 				<div class="footer-clmn2">
 				<p> STAY CONNECTED WITH</p>
-				<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="80"alt="Description of the image"></a>
+				<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="50"alt="Description of the image"></a>
 			</div>
 		</div>
 	</div>

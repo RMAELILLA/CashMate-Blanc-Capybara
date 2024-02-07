@@ -24,11 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $uploadOk = 0;
             }
         }
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
-        }
+
         // Check file size
         if ($_FILES["profile-photo"]["size"] > 500000) {
             echo "Sorry, your file is too large.";
@@ -60,17 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-
-
-    // Handle editing the name (if needed)
-    if (isset($_POST["new_name"])) {
-        $newName = mysqli_real_escape_string($con, $_POST["new_name"]);
-        $query = "UPDATE users SET user_name = '$newName' WHERE id = " . $user_data['id'];
-        mysqli_query($con, $query);
-        // Redirect to the profile page after updating the name
-        header("Location: account-settings.php");
-        exit();
-    }
 
 }
 ?>
@@ -122,10 +107,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         width: 100%;
         border-top: 2px solid #000;
         margin: auto;
+        margin-top: 2%;
     }
 
-    .account-settings-links, .list-group-item, .form-group input[type="file"] {
+    .account-settings-links, .list-group-item, .form-gl input[type="file"] {
         border: none;
+        border-top: none;
     }
 
     .list-group-item {
@@ -154,10 +141,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         background-color: #6ABA8C;
         color: #fff;
         width: 100%;
-        max-width: 10%;
+        max-width: 15%;
         height: 15%;
         border: none;
-        border-radius: 20%;
+        border-radius: 5%;
         cursor: pointer;
     }
 
@@ -167,6 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     .username-pic {
         align-items: center;
+        
     }
 
     .user {
@@ -182,11 +170,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         font-weight: 500;
     }
 
-    .form-group button {
+    .form-gl button {
         float: right;
     }
 
-    .form-group {
+    .form-gl {
         padding: 1%;
     }
 
@@ -218,6 +206,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         display: block;
         margin-bottom: 10px;
     }
+
+    .form-group1{
+        position: absolute;
+        border: #6ABA8C;
+        transform: scale(2);
+        opacity: 0;
+    }
+
+    .form-group {
+        border-top: none;
+    }
+
+    .delete-account-btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #6ABA8C;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .delete-account-btn:hover {
+        background-color: #6ABA8C;
+        text-decoration: none;
+        align-items: center;
+        color: white;
+    }
+
 
     </style>
 </head>
@@ -271,6 +290,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="section1">
             <div class="username-info">
                 <div class="username-pic">
+                    <input type="file" name="profile-photo" class="form-group1">
                     <?php
                         $profile_photo_path = $user_data['user_profile'];
                         if (!empty($profile_photo_path)) {
@@ -303,31 +323,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="tab-content">
                 <form method="post" action="account-settings.php" enctype="multipart/form-data">
                     <div class="card-body media align-items-center">
-                        <div class="form-group">
-                            <input type="file" name="profile-photo" class="form-label">
+                        <div class="form-gl">
+                            <button type="submit">Upload Profile Photo</button>
                         </div>
-                        <button type="submit">Upload Profile Photo</button>
+                        
                     </div>
                     <hr>
                     <div class="card-body">
-                        <div class="form-group">
-                            <label class="form-label">Name</label>
+                        <div class="form-gl">
+                            <label class="form-group">Name</label>
                             <button id="edit-name-btn" type="button">EDIT</button>
                             <p><b><?php echo $user_data['f_name'] . ' ' . $user_data['l_name']; ?></b></p>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">E-mail Address</label>
+                        <div class="form-gl">
+                            <label class="form-group">E-mail Address</label>
                             <button id="edit-email-btn" type="button">EDIT</button>
                             <p id="email"><b><?php echo $user_data['email'] ?></b></p>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Password</label>
+                        <div class="form-gl">
+                            <label class="form-group">Password</label>
                             <button type="button">UPDATE</button>
                             <p><b>********</b></p>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Delete Account?</label>
-                            <button type="button">DELETE</button>
+                        <div class="form-gl">
+                            <label class="form-group">Delete Account?</label>
+                            <a href="delete-account.php" class="delete-account-btn">DELETE</a>
                         </div>
                     </div>
                 </form>
@@ -408,49 +428,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         });
 
     
-        // Edit Name and Email
 
-        document.querySelector('#edit-name-btn').addEventListener('click', function () {
-            const nameField = document.querySelector('#name');
-            const newName = prompt('Enter new name:', nameField.textContent.trim());
-
-            if (newName !== null && newName !== '') {
-                nameField.textContent = newName;
-            }
-        });
-
-        document.querySelector('#edit-email-btn').addEventListener('click', function () {
-            const emailField = document.querySelector('#email');
-            const newEmail = prompt('Enter new email:', emailField.textContent.trim());
-
-            if (newEmail !== null && newEmail !== '') {
-                emailField.textContent = newEmail;
-            }
-        });
     
-            // Update Password
-            document.querySelector('#update-password-btn').addEventListener('click', function () {
-                const currentPassword = prompt('Enter current password:');
-                if (currentPassword !== null && currentPassword !== '') {
-                    alert('Password updated successfully!');
-                } else {
-                    alert('Password update failed. Please enter the correct current password.');
-                }
-            });
-    
-            // Delete Account
-            document.querySelector('#delete-account-btn').addEventListener('click', function () {
-                const confirmDelete = confirm('Are you sure you want to delete your account?');
-    
-                if (confirmDelete) {
-                    alert('Account deleted successfully!');
-                }
-            });
-    
-            // Sign Out
-            document.querySelector('#sign-out-btn').addEventListener('click', function () {
-                alert('Signed out successfully!');
-            });
         });
     </script>
     
@@ -468,7 +447,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			<div class="col-md-4">
 				<div class="footer-clmn2">
 				<p> STAY CONNECTED WITH</p>
-				<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="80"alt="Description of the image"></a>
+				<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="50"alt="Description of the image"></a>
 			</div>
 		</div>
 	</div>
