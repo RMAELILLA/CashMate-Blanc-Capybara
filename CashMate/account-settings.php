@@ -1,12 +1,80 @@
 <?php 
 session_start();
 
-	include("connection.php");
-	include("functions.php");
+include("connection.php");
+include("functions.php");
 
-	$user_data = check_login($con);
+$user_data = check_login($con);
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Handle updating profile picture
+    if (isset($_FILES["profile-photo"])) {
+        $target_dir = "user_profiles/";
+        $target_file = $target_dir . basename($_FILES["profile-photo"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        // Check if image file is a actual image or fake image
+        if(isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["profile-photo"]["tmp_name"]);
+            if($check !== false) {
+                echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
+        }
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            echo "Sorry, file already exists.";
+            $uploadOk = 0;
+        }
+        // Check file size
+        if ($_FILES["profile-photo"]["size"] > 500000) {
+            echo "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+        // Allow certain file formats
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["profile-photo"]["tmp_name"], $target_file)) {
+                echo "The file ". htmlspecialchars( basename( $_FILES["profile-photo"]["name"])). " has been uploaded.";
+                // Update profile photo path in the database
+                $user_profile_path = $target_file;
+                $query = "UPDATE users SET user_profile = '$user_profile_path' WHERE id = " . $user_data['id'];
+                mysqli_query($con, $query);
+                // Redirect to the profile page after updating the profile photo
+                header("Location: account-settings.php");
+                exit();
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
+    }
+
+
+
+    // Handle editing the name (if needed)
+    if (isset($_POST["new_name"])) {
+        $newName = mysqli_real_escape_string($con, $_POST["new_name"]);
+        $query = "UPDATE users SET user_name = '$newName' WHERE id = " . $user_data['id'];
+        mysqli_query($con, $query);
+        // Redirect to the profile page after updating the name
+        header("Location: account-settings.php");
+        exit();
+    }
+
+}
 ?>
+
 
 
 <!DOCTYPE html>
@@ -86,9 +154,10 @@ session_start();
         background-color: #6ABA8C;
         color: #fff;
         width: 100%;
-        max-width: 12%;
+        max-width: 10%;
+        height: 15%;
         border: none;
-        border-radius: 10px;
+        border-radius: 20%;
         cursor: pointer;
     }
 
@@ -170,14 +239,23 @@ session_start();
 				<div class="col-md-9 collapse navbar-collapse navbar-right"id="drop-img">
 					<ul class="nav navbar-nav "  >
 						<li ><a href="Dashboard.php" class="link">Dashboard</a></li>
-						<li><a href="Income page.php" class="link">Income</a></li>
+						<li><a href="Income-page.php" class="link">Income</a></li>
 						<li><a href="Spendings.php" class="link">Spendings</a></li>
 						<li ><a href="Planner.php" class="link">Planner</a></li> 
 						<li ><a href="get-help.php" class="link"><img src="Images/question.png"></a></li> 
 						<li ><a href="account-settings.php" class="link"><img src="Images/settings.png"></a></li> 
 						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
 						  <ul class="dropdown-menu" style="background-color:rgb(140,195,126);">
-							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
+							<li>
+                                <?php
+                                    $profile_photo_path = $user_data['user_profile'];
+                                    if (!empty($profile_photo_path)) {
+                                        echo '<img src="' . $profile_photo_path . '" style="width:50px;height:50px;margin-right:10px;">';
+                                    } else {
+                                        echo '<img src="Images/profile photo icon.png" style="width:50px;height:50px;margin-right:10px;">';
+                                    }
+                                ?>
+                            </li>  
 							<p style="margin-left:60;margin-right:60;"><?php echo $user_data['user_name'] ?></p>
 							<p><?php echo $user_data['email'] ?></p>
 							<p style="margin-left:60;margin-right:60;" ><a href="logout.php" onclick="signOut()">Sign-out</a></p>
@@ -193,7 +271,14 @@ session_start();
         <div class="section1">
             <div class="username-info">
                 <div class="username-pic">
-                    <img src="Images/profile photo icon.png" height="70" width="70">
+                    <?php
+                        $profile_photo_path = $user_data['user_profile'];
+                        if (!empty($profile_photo_path)) {
+                            echo '<img src="' . $profile_photo_path . '" height="70" width="70">';
+                        } else {
+                            echo '<img src="Images/profile photo icon.png" height="70" width="70">';
+                        }
+                    ?>
                     <div class="user">
                         <span class="username-label"><b><?php echo $user_data['user_name'] ?></b></span>
                         <label id="email"><b><?php echo $user_data['email'] ?></b></label>
@@ -216,22 +301,23 @@ session_start();
 
         <div class="section2">
             <div class="tab-content">
-                <div>
+                <form method="post" action="account-settings.php" enctype="multipart/form-data">
                     <div class="card-body media align-items-center">
                         <div class="form-group">
-                            <input type="file" name="profile-photo">
+                            <input type="file" name="profile-photo" class="form-label">
                         </div>
+                        <button type="submit">Upload Profile Photo</button>
                     </div>
                     <hr>
                     <div class="card-body">
                         <div class="form-group">
                             <label class="form-label">Name</label>
-                            <button type="button">EDIT</button>
-                            <p><b><?php echo $user_data['f_name'], $user_data['l_name'] ?></b></p>
+                            <button id="edit-name-btn" type="button">EDIT</button>
+                            <p><b><?php echo $user_data['f_name'] . ' ' . $user_data['l_name']; ?></b></p>
                         </div>
                         <div class="form-group">
                             <label class="form-label">E-mail Address</label>
-                            <button type="button">EDIT</button>
+                            <button id="edit-email-btn" type="button">EDIT</button>
                             <p id="email"><b><?php echo $user_data['email'] ?></b></p>
                         </div>
                         <div class="form-group">
@@ -244,7 +330,7 @@ session_start();
                             <button type="button">DELETE</button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -322,24 +408,25 @@ session_start();
         });
 
     
-            // Edit Name and Email
-            document.querySelector('#edit-name-btn').addEventListener('click', function () {
-                const nameField = document.querySelector('#name');
-                const newName = prompt('Enter new name:', nameField.textContent.trim());
-    
-                if (newName !== null && newName !== '') {
-                    nameField.textContent = newName;
-                }
-            });
-    
-            document.querySelector('#edit-email-btn').addEventListener('click', function () {
-                const emailField = document.querySelector('#email');
-                const newEmail = prompt('Enter new email:', emailField.textContent.trim());
-    
-                if (newEmail !== null && newEmail !== '') {
-                    emailField.textContent = newEmail;
-                }
-            });
+        // Edit Name and Email
+
+        document.querySelector('#edit-name-btn').addEventListener('click', function () {
+            const nameField = document.querySelector('#name');
+            const newName = prompt('Enter new name:', nameField.textContent.trim());
+
+            if (newName !== null && newName !== '') {
+                nameField.textContent = newName;
+            }
+        });
+
+        document.querySelector('#edit-email-btn').addEventListener('click', function () {
+            const emailField = document.querySelector('#email');
+            const newEmail = prompt('Enter new email:', emailField.textContent.trim());
+
+            if (newEmail !== null && newEmail !== '') {
+                emailField.textContent = newEmail;
+            }
+        });
     
             // Update Password
             document.querySelector('#update-password-btn').addEventListener('click', function () {
@@ -380,12 +467,8 @@ session_start();
 			</div>
 			<div class="col-md-4">
 				<div class="footer-clmn2">
-				<p> STAY CONNECTED </p>
-				<a href="#"><i class="fa fa-facebook fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-twitter fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-linkedin fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-youtube fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-envelope fa-2x" style="color: white"></i></a>
+				<p> STAY CONNECTED WITH</p>
+				<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="80"alt="Description of the image"></a>
 			</div>
 		</div>
 	</div>

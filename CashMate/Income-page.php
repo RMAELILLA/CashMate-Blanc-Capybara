@@ -86,7 +86,16 @@ while ($row = mysqli_fetch_assoc($result)) {
 						<li ><a href="account-settings.php" class="link"><img src="Images/settings.png"></a></li> 
 						<li ><a class="dropdown" data-toggle="dropdown"><img src="Images/male-user.png"></a>  
 						  <ul class="dropdown-menu" style="background-color:rgb(140,195,126);">
-							<li> <img src="Images/male-user.png" style="width:300px;height:300px;margin-left:60;margin-right:60;"></li>  
+						  	<li>
+                                <?php
+                                    $profile_photo_path = $user_data['user_profile'];
+                                    if (!empty($profile_photo_path)) {
+                                        echo '<img src="' . $profile_photo_path . '" style="width:50px;height:50px;margin-right:10px;">';
+                                    } else {
+                                        echo '<img src="Images/profile photo icon.png" style="width:50px;height:50px;margin-right:10px;">';
+                                    }
+                                ?>
+                            </li>    
 							<p style="margin-left:60;margin-right:60;"><?php echo $user_data['user_name'] ?></p>
 							<p ><?php echo $user_data['email'] ?></p>
 							<p style="margin-left:60;margin-right:60;" ><a href="logout.php" onclick="signOut()">Sign-out</a></p>
@@ -177,12 +186,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 			</div>
 			<div class="col-md-4">
 				<div class="footer-clmn2">
-				<p> STAY CONNECTED </p>
-				<a href="#"><i class="fa fa-facebook fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-twitter fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-linkedin fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-youtube fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-envelope fa-2x" style="color: white"></i></a>
+				<p> STAY CONNECTED WITH</p>
+				<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="80"alt="Description of the image"></a>
 			</div>
 		</div>
 	</div>
