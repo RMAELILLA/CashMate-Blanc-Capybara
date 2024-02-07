@@ -12,19 +12,35 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $password = md5($_POST['password']);
     $cpass = md5($_POST['cpassword']);
 
-    if (!empty($user_name) && !empty($password) && !empty($f_name) && !empty($l_name) && !empty($email) && !empty($cpass) && !is_numeric($user_name)) {
+    if (!empty($user_name) && !empty($password) && !empty($f_name) && !empty($l_name) && !empty($email) && !empty($cpass) && !is_numeric($user_name) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-        // Check if the passwords match
         if ($password == $cpass) {
 
-            // save to database
-            $user_id = random_num(20);
-            $query = "INSERT INTO users (user_id, f_name, l_name, user_name, email, password) VALUES ('$user_id', '$f_name', '$l_name', '$user_name', '$email', '$password')";
+            $check_username_query = "SELECT * FROM users WHERE user_name = '$user_name'";
+            $result_username = mysqli_query($con, $check_username_query);
 
-            mysqli_query($con, $query);
+            $check_email_query = "SELECT * FROM users WHERE email = '$email'";
+            $result_email = mysqli_query($con, $check_email_query);
 
-            header("Location: login-page.php");
-            die;
+            if (mysqli_num_rows($result_username) == 0 && mysqli_num_rows($result_email) == 0) {
+
+                // save to database
+                $user_id = random_num(20);
+                $query = "INSERT INTO users (user_id, f_name, l_name, user_name, email, password) VALUES ('$user_id', '$f_name', '$l_name', '$user_name', '$email', '$password')";
+
+                mysqli_query($con, $query);
+
+                header("Location: login-page.php");
+                die;
+
+            } else {
+                if (mysqli_num_rows($result_username) > 0) {
+                    $username_error = "Username is already in use!";
+                }
+                if (mysqli_num_rows($result_email) > 0) {
+                    $email_error = "Email is already in use!";
+                }
+            }
         } else {
             echo "Passwords do not match!";
         }
@@ -33,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -116,12 +133,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <div class="col-md-12">
                             <label for="username">Username</label>
                             <input type="text" name="user_name" required>
+                            <?php if(isset($username_error)) { echo "<p style='color:red;'>$username_error</p>"; } ?>
                         </div>
                     </div>
                     <div class="row" id="line-one">
                         <div class="col-md-12">
                             <label for="email">Email Address</label>
                             <input type="email" name="email" required>
+                            <?php if(isset($email_error)) { echo "<p style='color:red;'>$email_error</p>"; } ?>
                         </div>
                     </div>
                     <div class="row" id="line-one">
