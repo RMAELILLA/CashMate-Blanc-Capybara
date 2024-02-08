@@ -56,6 +56,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    // Handle updating user's name
+    if (isset($_POST["new_name"])) {
+        $new_name = $_POST["new_name"];
+        // Update the user's name in the database
+        list($first_name, $last_name) = explode(' ', $new_name, 2); // Split full name into first and last name
+        $query = "UPDATE users SET f_name = '$first_name', l_name = '$last_name' WHERE id = " . $user_data['id'];
+        mysqli_query($con, $query);
+        // Redirect to the profile page or display a success message
+        header("Location: account-settings.php");
+        exit();
+    }
 
 }
 ?>
@@ -326,15 +337,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="form-gl">
                             <button type="submit">Upload Profile Photo</button>
                         </div>
-                        
                     </div>
+                </form>
+                </div>
                     <hr>
                     <div class="card-body">
                         <div class="form-gl">
                             <label class="form-group">Name</label>
                             <button id="edit-name-btn" type="button">EDIT</button>
-                            <p><b><?php echo $user_data['f_name'] . ' ' . $user_data['l_name']; ?></b></p>
+                            <p id="user-name"><b><?php echo $user_data['f_name'] . ' ' . $user_data['l_name']; ?></b></p>
+                            <input type="text" id="edit-name-input" name="new_name" style="display: none;">
                         </div>
+
                         <div class="form-gl">
                             <label class="form-group">E-mail Address</label>
                             <button id="edit-email-btn" type="button">EDIT</button>
@@ -350,7 +364,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <a href="delete-account.php" class="delete-account-btn">DELETE</a>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -427,7 +440,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             labelUploadPhoto.textContent = 'Update Profile Photo';
         });
 
-    
+        document.addEventListener('DOMContentLoaded', function () {
+            const editNameBtn = document.getElementById('edit-name-btn');
+            const userNameText = document.getElementById('user-name');
+            const editNameInput = document.getElementById('edit-name-input');
+
+            editNameBtn.addEventListener('click', function () {
+                // Toggle visibility of elements
+                userNameText.style.display = 'none';
+                editNameInput.style.display = 'block';
+
+                // Set value of input field to current name
+                editNameInput.value = userNameText.textContent.trim();
+            });
+        });
 
     
         });
