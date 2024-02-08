@@ -121,6 +121,7 @@ if (!$result) {
     }
   </script>
 	
+	
 	<div class="container-fluid">
 		<div class="row" id="username-greetings"> 
 			<h1>Welcome Back, <span id="user_data"><?php echo $user_data['user_name'] ?>!</span></h1> 
@@ -161,13 +162,8 @@ if (!$result) {
 							<div class="col-md-12 Available-balance text-center " style="margin-bottom:10px;">
 								<h1>Your Goal</h1>
 								<h2 style="font-size:20px;"><b>Saving Little by Little</b></h2>
-								<form  method="post">
-									<input type="Planner" placeholder="For Retirement "name="Retirement" id="Retire">
-									<input type="Planner" placeholder="For House & Lot "name="HouseandLot" >
-									<input type="Planner" placeholder="For Vehicle "name="Vehicle" >
-									<input type="submit"class="goal-button text-center " style="margin-bottom:15px; margin-top:8px; width:500px padding:5px;"  name="Submit"class="button" value="Submit" /> 
-
-								</form>
+								<p style="font-size:14px;">"Saving little by little creates the foundation for monumental achievements. 
+								Each small step forward is a testament to the power of persistence and the belief that every effort, no matter how small, contributes to a greater success."</p>
 								
 
 							</div>
@@ -186,60 +182,99 @@ if (!$result) {
 		</div>
 		<div class="container">
 			<div class="col-md-6 Available-balance"style="margin-bottom:10px"   >
-				<h1>Planner</h1>
-				<div id="chartCont" style="height: 370px; width: 100%; margin-top:5%;" ></div>
-
+				<div style="display:none;">
+				<h1 style="padding:15;"> <img style="height:50px;width:50px" src="Images/retirement-icon.png" alt="Retirement Icon">&nbsp;&nbsp;House and Lot </h1>
+					<p>No Available Data</b></p> 
+					<div class="progress-bar-container planner-cont"  >
+						<div class="progress">
+							<div class="progress-bar-fill"> </div>
+						</div>
+					</div>
+					<div>
+							<p><b>Monthly Deposit:</b>N/A</p> 
+							<p><b>Target Year:</b>N/A</p>
+					</div>		
+				</div>
+					 
 			</div>
 			
+			 <?php
+
+
+				// Fetch planner data for all planners
+				$allPlannersSql = "SELECT DISTINCT plan_name FROM planner WHERE user_name = '" . $user_data['user_name'] . "'";
+				$allPlannersResult = mysqli_query($con, $allPlannersSql);
+
+				$plannerNames = array();
+				while ($plannerData = mysqli_fetch_assoc($allPlannersResult)) {
+					$plannerNames[] = $plannerData['plan_name'];
+				}
+
+				// Encode the planner names array as JSON
+				$plannerNamesJSON = json_encode($plannerNames);
+
+				// Close the database connection
+				mysqli_close($con);
+
+				// Output the JSON data
+				echo "<script>var plannerNamesJSON = $plannerNamesJSON;</script>";
+				?>
+
+				<script>
+				// Function to fetch and display planner data for a specific planner
+				function fetchData(selectedPlanner) {
+					$.ajax({
+						type: 'POST',
+						url: 'fetch_planner_data.php',
+						data: { planner: selectedPlanner },
+						success: function (response) {
+							// Append the response content for the current planner
+							$('.col-md-6.Available-balance').append(response);
+						},
+						error: function (error) {
+							console.error('Error fetching data:', error);
+						}
+					});
+				}
+
+				// Use plannerNamesJSON to access the planner names fetched from the database
+				var plannerNames = plannerNamesJSON;
+
+				// Loop through the plannerNames array and call fetchData for each planner
+				for (var i = 0; i < plannerNames.length; i++) {
+					fetchData(plannerNames[i]);
+				}
+				</script>
+
 			<div class="col-md-5 Available-balance" style="margin-left:10px;margin-bottom:10px"  >
 				<div class="deposit-history">
 				<h1> Spendings </h1>
 			</div>
+ 
+
 			<div class="deposit-record">
-				<table class="table table-responsive-md deposit">
-					<tbody>
-						<tr>
-						  <th scope="col">Type</th>
-						  <th scope="col">Date</th>
-						  <th scope="col">Amount</th>
-						</tr>
-						<tr>
-							<td scope="row">House</td>
-							<td>11-09-03</td>
-							<td>P550.21</td> 
-						</tr>
-						<tr>
-							<td scope="row">Transportation</td>
-							<td>10-12-03</td>
-							<td>P1500.00</td> 
-						</tr>
-						<tr>
-							<td scope="row">Entertainment</td>
-							<td>9-015-03</td>
-							<td>P900.21</td> 
-						</tr>
-						<tr>
-							<td scope="row">Food</td>
-							<td>8-23-03</td>
-							<td>P11000.00</td> 
-						</tr>
-						<tr>
-							<td scope="row">Pet</td>
-							<td>7-16-03</td>
-							<td>P300.00</td> 
-						</tr>
-						<tr>
-							<td scope="row">Clothing</td>
-							<td>7-2-03</td>
-							<td>P300.00</td> 
-						</tr>
-						<tr>
-							<td scope="row">HealthCare</td>
-							<td>7-30-03</td>
-							<td>P500.00</td> 
-						</tr>
-					</tbody>
-				</table>
+  <?php if ($result->num_rows > 0): ?>
+        <table class="table table-responsive-md table-borderless  ">
+            <tr>
+                <th>Column Name</th>
+                <th>Value</th>
+            </tr>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <?php foreach ($row as $key => $value): ?>
+                        <?php if ($key !== 'user_name' && $key !== 'id' && $key !== 'start_date' && !empty($value)): ?>
+                            <td><?php echo $key; ?></td>
+                            <td><?php echo $value; ?></td>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    <!-- Display start_date in a separate column without the column name -->
+                    <td><?php echo $row['start_date']; ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+        <?php else: ?>
+        <p>No results found.</p>
+        <?php endif; ?>
 			</div>
 			</div>
 		</div>
@@ -254,7 +289,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	exportEnabled: false,
 	theme: "light1", 
 	title:{
-		text: "Dashboard"
+		text: "Dashboard of Expenses"
 	},
 	data: [{
 		type: "pie",
@@ -262,25 +297,12 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	}]
 	
 });
-var charts = new CanvasJS.Chart("chartCont", {
-	animationEnabled: true,
-	exportEnabled: false,
-	theme: "light2", 
-	title:{
-		text: "Planner"
-	},
-	data: [{
-		type: "bar", 
-		dataPoints: <?php echo json_encode($Data, JSON_NUMERIC_CHECK); ?>
-	}]
-	
-});
-charts.render();
+
 chart.render();
  
 }
 </script>
-   
+  
 
 	
 
@@ -299,54 +321,55 @@ chart.render();
   
 
     <div id="popupForm" class="popup" >
-        <form class="form-container" >
-          <h3><img class="back-arrow" src="Images/back-arrow.png" id="closePopupBtn" onclick="closeForm()">New Expense</h3>
-            <label for="source">Enter the Amount:</label><br>
-            <input type="text" class="calculator-screen">
-
-
-            <div class="calculator-keys">
-               
-              <button type="button" class="operator" value="+">+</button>
-              <button type="button" class="operator" value="-">-</button>
-              <button type="button" class="operator" value="*">&times;</button>
-              <button type="button" class="operator" value="/">&divide;</button>
-
-              <button type="button" value="7">7</button>
-              <button type="button" value="8">8</button>
-              <button type="button" value="9">9</button>
-
-              <button type="button" value="4">4</button>
-              <button type="button" value="5">5</button>
-              <button type="button" value="6">6</button>
-
-              <button type="button" value="1">1</button>
-              <button type="button" value="2">2</button>
-              <button type="button" value="3">3</button>
-
-              <button type="button" value="0">0</button>
-              <button type="button" class="decimal" value=".">.</button>
-              <button type="button" class="all-clear" value="all-clear">AC</button>
-
-              <button type="button" class="equal-sign operator" value="=">=</button>
-            </div>
-
-            <label for="expenseType">Expense Type:</label><br>
-            <select id="expenseType" class="expense-type-dropdown">
-                <option value="choice1">Shopping</option>
-                <option value="choice2">Transportation</option>
-                <option value="choice3">Healthcare</option>
-                <option value="choice4">Pets</option>
-                <option value="choice5">House</option>
-                <option value="choice6">Entertainment</option>
-                <option value="choice7">Grocery</option>
-                <option value="choice8">Food</option>
-            </select>
-
-            <button type="submit" class="btn-cancel" id="closePopupBtn" onclick="closeForm()">Submit</button> <!--Fix for data submission-->
-        </form>
-    </div>        
+       <form class="form-container" method="POST" action="process_form.php">
+    <h3><img class="back-arrow" src="Images/back-arrow.png" id="closePopupBtn" onclick="closeForm()">New Expense</h3>
+    <label for="amount">Enter the Amount:</label><br>
+    <input name="amount" type="text" class="calculator-screen" id="amount"><br>
+    <label for="start_date">Start Date:</label><br>
+    <input type="date" name="start_date" id="start_date" required><br>
+    <label for="expense_type">Expense Type:</label><br>
+    <select name="expense_type" id="expense_type" class="expense-type-dropdown">
+        <option value="Shopping">Shopping</option>
+        <option value="Transportation">Transportation</option>
+		<option value="Clothing">Clothing</option>
+        <option value="HealthCare">HealthCare</option>
+        <option value="Pet">Pet</option>
+        <option value="House">House</option>
+        <option value="Entertainment">Entertainment</option> 
+        <option value="Food">Food</option>
+    </select>
+    <!-- Hidden input field to store the selected expense type -->
+    <input type="hidden" name="selected_expense_type" id="selected_expense_type">
+    <button type="submit" class="btn-cancel">Submit</button>
+</form>
 </div>
+<script>
+    // JavaScript to set the value of the hidden input field when a new expense type is selected
+    document.getElementById("expense_type").addEventListener("change", function() {
+        document.getElementById("selected_expense_type").value = this.value;
+    });
+</script>
+
+
+ 
+
+			</div>        
+		</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const datePickerBtn = document.getElementById('datePickerBtn');
+        const selectedDateInput = document.getElementById('selectedDate');
+
+        // Function to open date picker
+        datePickerBtn.addEventListener('click', function() {
+            const selectedDate = prompt('Please select a date (YYYY-MM-DD):');
+            if (selectedDate) {
+                selectedDateInput.value = selectedDate;
+            }
+        });
+    });
+</script>
+
 
 <script type="text/javascript">
   const calculator = {
@@ -492,14 +515,19 @@ document.getElementById('closePopupBtn').addEventListener('click', function() {
 		<div class="row" id="footer">
 			<div class="col-md-8">
 				<div class="footer-clmn1">
-				<h1>CashMate</h1>
+				<h1>STAY CONNECTED WITH</h1>
 				<p>Navigate Your Finances with Confidence</p>
+				<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="50" alt="Description of the image"></a>
 			</div>
 			</div>
 			<div class="col-md-4">
 				<div class="footer-clmn2">
-				<p> STAY CONNECTED WITH</p>
-				<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="50"alt="Description of the image"></a>
+				<p> STAY CONNECTED </p>
+				<a href="#"><i class="fa fa-facebook fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-twitter fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-linkedin fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-youtube fa-2x" style="color: white"></i></a>
+				<a href="#"><i class="fa fa-envelope fa-2x" style="color: white"></i></a>
 			</div>
 		</div>
 	</div>
@@ -511,12 +539,15 @@ document.getElementById('closePopupBtn').addEventListener('click', function() {
 		</div>
 		<div class="col-md-6">
 			<div class="footer-2clmn2">
-				<p><a href="terms-conditions.php">Terms of Use </a>|<a href="privacy-policy.php"> Privacy Policy </a>|<a href="sitemap.php"> Site Map </a>|</p>
+				<p><a href="terms-conditions.php">Terms of Use </a>|<a href="privacy-policy.html"> Privacy Policy </a>|<a href="sitemap.html"> Site Map </a>|</p>
 			</div>
 		</div>
 	</div>
   </footer>
 
+</html> 
+
+ 
 </html> 
 
  
