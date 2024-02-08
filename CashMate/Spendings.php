@@ -7,7 +7,13 @@ session_start();
 	$user_data = check_login($con);
 
 ?>
+<?php
+$sql = "SELECT * FROM dashchart WHERE user_name = '" . $user_data['user_name'] . "' ORDER BY DATE_FORMAT(start_date, '%Y-%m')";
+$result = $con->query($sql);
 
+if (!$result) {
+    die("Error executing query: " . $con->error);
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,172 +85,61 @@ session_start();
 			<h1>Spend Wise!</h1> 
 		</div>
 	</div>
-	<div class="container">
-		<div class="Spend">
-		<h1>Spendings <button>+ Add Category</button></h1>
+	<div class="container" style="margin-top:5%;">
+		<div class="col-md-4 Available-balance" style="margin:10px; height:auto;">
+			<div class="Spend text-center" >
+			<h1>Spendings </h1>
+			 <div  >
+       <form class="form-container" method="POST" action="process_form.php">
+    <h3><img class="back-arrow" src="Images/back-arrow.png" id="closePopupBtn" onclick="closeForm()">New Expense</h3>
+    <label for="amount">Enter the Amount:</label><br>
+    <input name="amount" type="text" class="calculator-screen" id="amount"><br>
+    <label for="start_date">Start Date:</label><br>
+    <input type="date" name="start_date" id="start_date" required><br>
+    <label for="expense_type">Expense Type:</label><br>
+    <select name="expense_type" id="expense_type" class="expense-type-dropdown">
+        <option value="Shopping">Shopping</option>
+        <option value="Transportation">Transportation</option>
+        <option value="HealthCare">HealthCare</option>
+        <option value="Pet">Pet</option>
+        <option value="House">House</option>
+        <option value="Entertainment">Entertainment</option> 
+        <option value="Food">Food</option>
+    </select>
+    <!-- Hidden input field to store the selected expense type -->
+    <input type="hidden" name="selected_expense_type" id="selected_expense_type">
+    <button type="submit" class="btn-cancel">Submit</button>
+</form>
+</div>
+			</div>
 		</div>
-		<table class="table table-responsive-md table-borderless spendings">
-					<tbody>
-						<tr>
-						  <th scope="col"></th>
-						  <th scope="col">October</th>
-						  <th scope="col">September</th>
-						  <th scope="col">August</th>
-						  <th scope="col">July</th>
-						</tr>
-						<tr>
-							<td scope="row"><b>House</b></td>
-							<td>P10,000<p>10-08-23</p></td>
-							<td>P10,000<p>09-08-23</p></td>
-							<td>P10,000<p>08-08-23</p></td>
-							<td>P10,000<p>07-08-23</p></td>
-						</tr>
-						<tr>
-							<td scope="row"><b>Transporatation</b></td>
-							<td>P3,000<p>10-08-23</p></td>
-							<td>P3,000<p>09-08-23</p></td>
-							<td>P3,000<p>08-08-23</p></td>
-							<td>P3,000<p>07-08-23</p></td>
-						</tr>
-						<tr>
-							<td scope="row"><b>Enterntainment</b></td>
-							<td>P1,000<p>10-08-23</p></td>
-							<td>P3,000<p>09-08-23</p></td>
-							<td>P5,000<p>08-08-23</p></td>
-							<td>P2,000<p>07-08-23</p></td>
-						</tr>
-						<tr>
-							<td scope="row"><b>Pets</b></td>
-							<td>P5,000<p>10-08-23</p></td>
-							<td>P5,000<p>09-08-23</p></td>
-							<td>P5,000<p>08-08-23</p></td>
-							<td>P1,500<p>07-08-23</p></td>
-						</tr>
-						<tr>
-							<td scope="row"><b>Healthcare</b></td>
-							<td>P1,000<p>10-08-23</p></td>
-							<td>P1,000<p>09-08-23</p></td>
-							<td>P1,000<p>08-08-23</p></td>
-							<td>P1,000<p>07-08-23</p></td>
-						</tr>
-						<tr>
-							<td scope="row"><b>Foods</b></td>
-							<td>P5,000<p>10-08-23</p></td>
-							<td>P5,000<p>09-08-23</p></td>
-							<td>P5,000<p>08-08-23</p></td>
-							<td>P5,000<p>07-08-23</p></td>
-						</tr>
-						<tr>
-							<td scope="row"><b>Shopping</b></td>
-							<td>P1,500<p>10-08-23</p></td>
-							<td>P1,500<p>09-08-23</p></td>
-							<td>P1,500<p>08-08-23</p></td>
-							<td>P3,500<p>07-08-23</p></td>
-						</tr>
-						<tr>
-							<td scope="row"><b>Grocery</b></td>
-							<td>P5,000<p>10-08-23</p></td>
-							<td>P5,000<p>09-08-23</p></td>
-							<td>P5,000<p>08-08-23</p></td>
-							<td>P5,000<p>07-08-23</p></td>
-						</tr>
-						<tr>
-							<td scope="row"><b>Total</b></td>
-							<td>P31,500<p>10-08-23</p></td>
-							<td>P33,500<p>09-08-23</p></td>
-							<td>P35,000<p>08-08-23</p></td>
-							<td>P30,00<p>07-08-23</p></td>
-						</tr>
-					</tbody>
-				</table>
-	</div>
-	<div class="container" style="margin-bottom:20px;">
-		<div class="col-md-7"> 
-			<canvas id="Spendings-graph" style="width:100%;max-width:600px;height:70%;"></canvas> 
-		</div>
-		<div class="col-md-5 categories">
-			<h1> Categories </h1>
-			<button>House -10%</button>
-			<button>Healthcare -15%</button>
-			<button>Grocery-15%</button>
-			<button>Food-15%</button>
-			<button>Transporatation-5%</button>
-			<button>Clothing-4%</button>
-			<button>Enterntainment-4%</button>
-			<button>Pets-3%</button> 
+		<div class="col-md-7 Available-balance" style="margin:10px; height:auto;">
+		<h1> Spending History </h1>
+		 <?php if ($result->num_rows > 0): ?>
+        <table class="table table-responsive-md table-borderless  " >
+            <tr>
+                <th>Column Name</th>
+                <th>Value</th>
+            </tr>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <?php foreach ($row as $key => $value): ?>
+                        <?php if ($key !== 'user_name' && $key !== 'id' && $key !== 'start_date' && !empty($value)): ?>
+                            <td><?php echo $key; ?></td>
+                            <td><?php echo $value; ?></td>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    <!-- Display start_date in a separate column without the column name -->
+                    <td><?php echo $row['start_date']; ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+        <?php else: ?>
+        <p>No results found.</p>
+        <?php endif; ?>
 		</div>
 	</div>
-	</body>
-	<script>
-			var xValues = ['House','healthcare','Clothing','Entertainment','Food','Grocery','Pet','Transportation'];
-			var yValues = [10,15,15,15,5,4,4,3,];
-			var barColors = ['yellow','orange','red','blue','violet','green','pink','gray'];
-
-			new Chart("Spendings-graph", {
-			  type: "doughnut",
-			  data: {
-				labels: false,
-				datasets: [{
-				  backgroundColor: barColors,
-				  data: yValues
-				}]
-			  },
-			  options: {
-				title: {
-				  display: true,
-				  text: "Spendings Graph"  
-				},
-				plugins: {
-				  labels: {
-					render: 'image',
-					images: [
-					  {
-						src: 'Images/planner/house.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/healthcare.png',
-						width: 30,
-						height: 30
-					  },
-					  {
-						src: 'Images/planner/clothing.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/entertainment.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/food.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/grocery.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/pet.png',
-						width: 30,
-						height: 30, 
-					  },
-					  {
-						src: 'Images/planner/transportation.png',
-						width: 30,
-						height: 30, 
-					  },
-					]
-					}
-					}
-			  }
-			});
-	</script>
-  <footer >
+<footer >
 	<div class="container-fluid">
 		<div class="row" id="footer">
 			<div class="col-md-8">
