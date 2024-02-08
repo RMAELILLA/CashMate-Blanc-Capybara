@@ -55,18 +55,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
+    
+    $user_id = $_SESSION['user_id']; // Assuming you store the user's ID in the session
 
-    // Handle updating user's name
-    if (isset($_POST["new_name"])) {
-        $new_name = $_POST["new_name"];
-        // Update the user's name in the database
-        list($first_name, $last_name) = explode(' ', $new_name, 2); // Split full name into first and last name
-        $query = "UPDATE users SET f_name = '$first_name', l_name = '$last_name' WHERE id = " . $user_data['id'];
-        mysqli_query($con, $query);
-        // Redirect to the profile page or display a success message
-        header("Location: account-settings.php");
-        exit();
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Update name
+        if (isset($_POST["new_name"])) {
+            $new_name = $_POST["new_name"];
+            list($first_name, $last_name) = explode(' ', $new_name, 2); // Split full name into first and last name
+            $query = "UPDATE users SET f_name = '$first_name', l_name = '$last_name' WHERE id = $user_id";
+            mysqli_query($con, $query);
+            // Redirect or display success message
+            header("Location: account-settings.php"); // Redirect to account settings page
+            exit();
+        }
+    
+        // Update email
+        if (isset($_POST["new_email"])) {
+            $new_email = $_POST["new_email"];
+            $query = "UPDATE users SET email = '$new_email' WHERE id = $user_id";
+            mysqli_query($con, $query);
+            // Redirect or display success message
+            header("Location: account-settings.php"); // Redirect to account settings page
+            exit();
+        }
+    
+        // Update password
+        if (isset($_POST["new_password"]) && isset($_POST["current_password"])) {
+            $new_password = $_POST["new_password"];
+            $current_password = $_POST["current_password"];
+            // Validate current password before updating
+            $query = "SELECT password FROM users WHERE id = $user_id";
+            $result = mysqli_query($con, $query);
+            $row = mysqli_fetch_assoc($result);
+            if (password_verify($current_password, $row['password'])) {
+                // Current password is correct, proceed with updating password
+                $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+                $query = "UPDATE users SET password = '$hashed_password' WHERE id = $user_id";
+                mysqli_query($con, $query);
+                // Redirect or display success message
+                header("Location: account-settings.php"); // Redirect to account settings page
+                exit();
+            } else {
+                // Current password is incorrect, display error message or handle as needed
+            }
+        }
     }
+    
+    
 
 }
 ?>
@@ -153,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         color: #fff;
         width: 100%;
         max-width: 15%;
-        height: 15%;
+        height: 10%;
         border: none;
         border-radius: 5%;
         cursor: pointer;
@@ -248,6 +284,88 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         color: white;
     }
 
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px;
+        background: #fff;
+        width: 500px;
+        max-height: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        cursor: pointer;
+        margin-top:20px; 
+        margin-bottom:25px; 
+    }
+    .pop-up label
+    {
+        font-size:16px;
+    }
+    #openPopupBtn {
+        background-color: #8DBC71;
+        border: none;
+        cursor: pointer;
+    }
+    .form-container {
+        max-width: 500px; 
+        padding:0 5 0 5;
+        background-color: white;
+        height:auto;
+    }
+
+    .form-container h3 {
+        color: white;
+        background-color: #8DBC71;
+        padding: 10px;
+        margin-top:10px;
+        margin-bottom: 15px;
+        text-align: center; 
+    }
+
+    .form-container input[type=text], 
+    .form-container input[type=category],
+    .form-container input[type=date],
+    .form-container input[type=number] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 10px 0;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    .btn-submit { 
+        color: black;
+        font-size: 15px;
+        padding: 8px 12px;
+        border: 5px solid #6ABA8C;
+        border-radius: 20px;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom:5px;
+        opacity: 0.8; 
+    }
+    
+    .btn-cancel {
+        background-color: white;
+        color: black;
+        font-size: 15px;
+        padding: 8px 12px;
+        border: 3px solid red;
+        border-radius: 20px;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom:5px;
+        opacity: 0.8; 
+    }
+
+    .btn-submit:hover, 
+    .btn-cancel:hover {
+        opacity: 1;
+    }
+
 
     </style>
 </head>
@@ -330,33 +448,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
 
+        
+
         <div class="section2">
             <div class="tab-content">
                 <form method="post" action="account-settings.php" enctype="multipart/form-data">
-                    <div class="card-body media align-items-center">
-                        <div class="form-gl">
-                            <button type="submit">Upload Profile Photo</button>
-                        </div>
-                    </div>
+                    <button type="submit">Upload Profile Photo</button>
                 </form>
                 </div>
+                    <button id="openBtn" class="button" onclick="openForm()">Behhhh</button>
                     <hr>
                     <div class="card-body">
                         <div class="form-gl">
                             <label class="form-group">Name</label>
-                            <button id="edit-name-btn" type="button">EDIT</button>
                             <p id="user-name"><b><?php echo $user_data['f_name'] . ' ' . $user_data['l_name']; ?></b></p>
-                            <input type="text" id="edit-name-input" name="new_name" style="display: none;">
                         </div>
 
                         <div class="form-gl">
                             <label class="form-group">E-mail Address</label>
-                            <button id="edit-email-btn" type="button">EDIT</button>
                             <p id="email"><b><?php echo $user_data['email'] ?></b></p>
                         </div>
                         <div class="form-gl">
                             <label class="form-group">Password</label>
-                            <button type="button">UPDATE</button>
                             <p><b>********</b></p>
                         </div>
                         <div class="form-gl">
@@ -367,6 +480,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
+
+    
+    <div id="nameForm" class="popup">
+        <form class="form-container" method="POST">
+            <h3>Update Account Settings</h3>
+            <label for="name">First Name:</label><br>
+            <input type="text" placeholder="Enter First Name" name="f_name" >
+            
+            <label for="name">Last Name:</label><br>
+            <input type="text" placeholder="Enter Last Name" name="l_name" >
+
+            <label for="email">Email:</label><br>
+            <input type="text" placeholder="Change Email" name="email" ><br>
+
+            <label for="cpass">Current Password:</label><br>
+            <input type="password" placeholder="Current Password" name="cpass" ><br>            
+
+            <label for="npass">New Password:</label><br>
+            <input type="password" placeholder="New Password" name="npass" ><br>
+
+            <button type="submit" class="btn-submit">Submit</button>
+            <button type="button" class="btn-cancel" id="closeBtn" onclick="closeForm()">Close</button>
+        </form>
+    </div>   
+<script>
+document.getElementById('openBtn').addEventListener('click', function() {
+    document.getElementById('nameForm').style.display = 'block';
+});
+
+document.getElementById('closeBtn').addEventListener('click', function() {
+    document.getElementById('nameForm').style.display = 'none';
+});
+</script>
+
 
     <div class="modal fade" id="notificationSettings" tabindex="-1" role="dialog" aria-labelledby="notificationSettingsLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -414,6 +561,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
+
+
+
+
+
+
     <script>
         // Update Profile Photo
         document.addEventListener('DOMContentLoaded', function () {
@@ -458,6 +611,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         });
     </script>
+    
+
     
 </body>
 
