@@ -9,24 +9,38 @@ session_start();
 ?>
 
 
-<!DOCTYPE html>
 <html lang="en">
   <head>
-    <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> CASHMATE | Site Map</title> 
-	<link rel="icon" href="Images/CASHMATE.png" type="image/x-icon" width="50px" height="50px">
-	<link type= "text/css" rel="stylesheet" href="CashMate.css"/>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title> CASHMATE | Site Map</title>
+    <link rel="icon" href="Images/CASHMATE.png" type="image/x-icon" width="50px" height="50px">
+    <link type="text/css" rel="stylesheet" href="CashMate.css" />
+    <link type="text/css" rel="stylesheet" href="sitemap.css" />
+
+
+    <!-- Bootstrapped Link-->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <!-- Bootstrapped Link-->
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script> 
-	
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+
   </head>
+
   <body>
 	<nav class="navbar navbar-expand-lg "id="NavBar">
 		<div class="container-fluid" id="cf">
@@ -75,47 +89,105 @@ session_start();
       alert('Signing out...');
     }
   </script>
-	<section>
-		<div class="container Site-Map">
-            <h1><b>CashMate Site Map</b></h1>
-                <div style="text-align: center;">
-                    <img src="Images/Site-Map.jpg" alt="Site Map" width="100%">
-                </div>
-            <h1><b>CashMate Use Cases</b></h>
-                <div style="text-align: center;">
-                    <img src="Images/Use-Cases.jpg" alt="Use-Cases">
-                </div>
+			
+
+	  <section>
+    <div class="container Site-Map">
+      <div class="sitemap-title" style="text-align: center;">CASHMATE SITEMAP</div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <!-- Content for first column goes here -->
+              <h5 class="card-title">Your Account</h5>
+              <ul class="sitemap-ul">
+                <li class="sitemap-li"><a href="account-settings.html">Account Settings</a></li>
+                <li class="sitemap-li"><a href="account-settings.html">Get Help</a></li>
+                <li class="sitemap-li"><a href="account-settings.html">Privacy Policy</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body card-sitemap">
+              <h5 class="card-title">Dashboard</h5>
+              <ul class="sitemap-ul">
+                <li class="sitemap-li"><a href="DashBoard.php">Available Balance</a></li>
+                <li class="sitemap-li"><a href="DashBoard.php">Your Goal</a></li>
+                <li class="sitemap-li"><a href="DashBoard.php">Planner</a></li>
+                <li class="sitemap-li"><a href="DashBoard.php">Spendings</a></li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Planner</h5>
+              <ul class="sitemap-ul">
+                <li class="sitemap-li"><a href="Planner.php">Deposit History</a></li>
+                <li class="sitemap-li"><a href="Planner.php">Deposit Now</a></li>
+                <li class="sitemap-li"><a href="Planner.php">Retirement</a></li>
+                <li class="sitemap-li"><a href="Planner.php">Vehicle</a></li>
+                <li class="sitemap-li"><a href="Planner.php">House and Lot</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body card-sitemap">
+              <h5 class="card-title ">Income</h5>
+              <ul class="sitemap-ul">
+                <li class="sitemap-li"><a href="Income-page.php">Add Income</a></li>
+                <li class="sitemap-li"><a href="Income-page.php">Computed Income</a></li>
+                <li class="sitemap-li"><a href="Income-page.php">View Income</a></li>
+                <li class="sitemap-li"><a href="Income-page.php">View Income Table</a></li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Spendings</h5>
+              <ul class="sitemap-ul">
+                <li class="sitemap-li"><a href="spendings.php">Add Spendings</a></li>
+                <li class="sitemap-li"><a href="spendings.php">Computed Spendings</a></li>
+                <li class="sitemap-li"><a href="spendings.php">View Spendings</a></li>
+                <li class="sitemap-li"><a href="spendings.php">View Income Table</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+			
+	<footer >
+		<div class="container-fluid">
+			<div class="row" id="footer">
+				<div class="col-md-8">
+					<div class="footer-clmn1">
+					<h1>CashMate</h1>
+					<p>Navigate Your Finances with Confidence</p>
+				</div>
+				</div>
+				<div class="col-md-4">
+					<div class="footer-clmn2">
+					<p> STAY CONNECTED WITH</p>
+					<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="50"alt="Description of the image"></a>
+				</div>
+			</div>
 		</div>
-		 
-	</section>
-	</body>
-	  <footer >
-	<div class="container-fluid">
-		<div class="row" id="footer">
-			<div class="col-md-8">
-				<div class="footer-clmn1">
-				<h1>CashMate</h1>
-				<p>Navigate Your Finances with Confidence</p>
+		<div class="row" id="footer-b">
+			<div class="col-md-6">
+				<div class="footer-2clmn1">
+					<p> Copyright 2023 © CashMate. All rights reserved.</p>
+				</div>
 			</div>
-			</div>
-			<div class="col-md-4">
-				<div class="footer-clmn2">
-				<p> STAY CONNECTED WITH</p>
-				<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="50"alt="Description of the image"></a>
+			<div class="col-md-6">
+				<div class="footer-2clmn2">
+					<p><a href="terms-conditions.php">Terms of Use </a>|<a href="privacy-policy.php"> Privacy Policy </a>|<a href="sitemap.php"> Site Map </a>|</p>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row" id="footer-b">
-		<div class="col-md-6">
-			<div class="footer-2clmn1">
-				<p> Copyright 2023 © CashMate. All rights reserved.</p>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="footer-2clmn2">
-				<p><a href="terms-conditions.php">Terms of Use </a>|<a href="privacy-policy.php"> Privacy Policy </a>|<a href="sitemap.php"> Site Map </a>|</p>
-			</div>
-		</div>
-	</div>
-  </footer>
-  </html>
+	</footer>
+</body>
+</html>
