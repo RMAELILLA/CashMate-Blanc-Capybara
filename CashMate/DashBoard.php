@@ -14,55 +14,47 @@ $con=mysqli_connect("localhost","root","","login_cashmate_db");
 
 if (mysqli_connect_errno()) {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
-$sql="SELECT * FROM dashchart WHERE user_name='" . $user_data['user_name'] . "'";
-if ($result=mysqli_query($con,$sql)){	  
-	foreach($result as $row){
-		array_push($dataPoints, array( "label"=>"Transportation","y"=> $row["Transportation"]),
-		array( "label"=>"Clothing","y"=> $row["Clothing"]),
-		array( "label"=>"House","y"=> $row["House"]),
-		array( "label"=>"HealthCare","y"=> $row["HealthCare"]),
-		array("label"=>"Entertainment", "y"=> $row["Entertainment"]),
-		array("label"=>"Food", "y"=> $row["Food"]),
-		array( "label"=>"Pet","y"=> $row["Pet"]));
-	}
-}
-/* 
-$sql1="SELECT * FROM planner WHERE user_name='" . $user_data['user_name'] . "'";
-if ($res=mysqli_query($con,$sql1)){	  
-	foreach($res as $out){
-		array_push($Data, array( "label"=>"Retirement","y"=> $out['Retirement']),
-		array( "label"=>"HouseandLot","y"=> $out["HouseandLot"]),
-		array( "label"=>"Vehicle","y"=> $out["Vehicle"]));
-	}
-}*/
+} 
+$sql = "SELECT * FROM dashchart WHERE user_name='" . $user_data['user_name'] . "'";
+if ($result = mysqli_query($con, $sql)) {
+    $dataPoints = array(); // Initialize array to store data points
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $Retirement = mysqli_real_escape_string($con, $_POST['Retirement']);
-    $HouseandLot = mysqli_real_escape_string($con, $_POST['HouseandLot']);
-    $Vehicle = mysqli_real_escape_string($con, $_POST['Vehicle']);
-	$result = "SELECT * FROM planner WHERE user_name = '" . $user_data['user_name'] . "'";
+    // Initialize arrays to aggregate values for each label
+    $labels = array("Transportation", "Clothing", "Shopping", "House", "HealthCare", "Entertainment", "Food", "Pet");
+    $aggregatedValues = array_fill_keys($labels, 0);
 
-$query = $con->query($result);
-
-if ($query) {
-    if (mysqli_num_rows($query) >0) {
-       $sql = "UPDATE planner SET Retirement='$Retirement',HouseandLot='$HouseandLot', Vehicle='$Vehicle' WHERE user_name='" . $user_data['user_name'] . "'";
-		if ($con->query($sql) === TRUE) {
-		} else {
-		  echo "Error updating record: " . $con->error;
-		}
-    } else {
-         $insert = "INSERT INTO planner( user_name,Retirement, HouseandLot, Vehicle) VALUES ('" . $user_data['user_name'] . "','$Retirement','$HouseandLot','$Vehicle')";
-
-            mysqli_query($con, $insert);
+    while ($row = mysqli_fetch_assoc($result)) {
+        // Aggregate values for each label
+        foreach ($labels as $label) {
+            // Convert fetched values to integers before adding
+            $aggregatedValues[$label] += (int)$row[$label];
+        }
     }
-} else {
-    echo 'Error: ' . mysqli_error();
-}
-}
 
+    // Push aggregated values into the $dataPoints array
+    foreach ($aggregatedValues as $label => $value) {
+        $dataPoints[] = array(
+            "label" => $label,
+            "y" => $value
+        );
+    }
+
+    // Encode the $dataPoints array into JSON format
+    $json_data = json_encode($dataPoints);
+    // Pass $json_data to your JavaScript for use with Chart.js
+}
 ?>
+<?php
+$sql = "SELECT * FROM dashchart WHERE user_name = '" . $user_data['user_name'] . "' ORDER BY DATE_FORMAT(start_date, '%Y-%m')";
+$result = $con->query($sql);
+
+if (!$result) {
+    die("Error executing query: " . $con->error);
+}
+ 
+ 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
