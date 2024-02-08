@@ -508,46 +508,37 @@ document.getElementById('closePopupBtn').addEventListener('click', function() {
 });
 </script>
 
-
+	<footer>
+		<div class="container-fluid">
+			<div class="row" id="footer">
+				<div class="col-md-8">
+					<div class="footer-clmn1">
+					<h1>CashMate</h1>
+					<p>Navigate Your Finances with Confidence</p>
+				</div>
+				</div>
+				<div class="col-md-4">
+					<div class="footer-clmn2">
+					<p> STAY CONNECTED WITH</p>
+					<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="50"alt="Description of the image"></a>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="footer-b">
+			<div class="col-md-6">
+				<div class="footer-2clmn1">
+					<p> Copyright 2023 © CashMate. All rights reserved.</p>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="footer-2clmn2">
+					<p><a href="terms-conditions.php">Terms of Use </a>|<a href="privacy-policy.php"> Privacy Policy </a>|<a href="sitemap.php"> Site Map </a>|</p>
+				</div>
+			</div>
+		</div>
+  	</footer>
 </body>
-  <footer >
-	<div class="container-fluid">
-		<div class="row" id="footer">
-			<div class="col-md-8">
-				<div class="footer-clmn1">
-				<h1>STAY CONNECTED WITH</h1>
-				<p>Navigate Your Finances with Confidence</p>
-				<a href="group-profile.html"><img src="Images/BlancCapybara.png" height="50" alt="Description of the image"></a>
-			</div>
-			</div>
-			<div class="col-md-4">
-				<div class="footer-clmn2">
-				<p> STAY CONNECTED </p>
-				<a href="#"><i class="fa fa-facebook fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-twitter fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-linkedin fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-youtube fa-2x" style="color: white"></i></a>
-				<a href="#"><i class="fa fa-envelope fa-2x" style="color: white"></i></a>
-			</div>
-		</div>
-	</div>
-	<div class="row" id="footer-b">
-		<div class="col-md-6">
-			<div class="footer-2clmn1">
-				<p> Copyright 2023 © CashMate. All rights reserved.</p>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="footer-2clmn2">
-				<p><a href="terms-conditions.php">Terms of Use </a>|<a href="privacy-policy.html"> Privacy Policy </a>|<a href="sitemap.html"> Site Map </a>|</p>
-			</div>
-		</div>
-	</div>
-  </footer>
+
 
 </html> 
 
- 
-</html> 
-
- 
