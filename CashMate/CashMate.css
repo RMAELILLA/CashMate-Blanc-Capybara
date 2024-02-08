@@ -613,6 +613,7 @@ body
 	padding:10 10 10 10;
 	background-color: white;
 	text-align: center;
+	
 }
 
 .form-container h3 {
@@ -706,8 +707,8 @@ button {
 .calculator-keys {
 	display:grid;
 	grid-template-columns: repeat(4,1fr);
-	grid-gap: 20px;
-	padding: 20px;
+	grid-gap: 10px;
+	padding: 10px;
 }
 /*Privacy=Policy*/
 .Privacy-Policy
@@ -1064,7 +1065,7 @@ button {
 	max-width: 500px; 
 	padding:0 5 0 5;
 	background-color: white;
-	max-height:10%;
+	max-height:auto;
 }
 
 .planner-container h3 {
