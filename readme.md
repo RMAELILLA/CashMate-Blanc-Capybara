@@ -2,6 +2,7 @@ I. FILES LIST
 ------------
 
 account-settings.html           Landing page for user's account
+
 connection.php                  Connection to a MySQL database using the mysqli extension
 create-account.php              Registration form for web application
 dashboard.php                   Backend and session management for dashboard 
