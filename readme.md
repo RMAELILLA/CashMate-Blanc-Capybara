@@ -1,18 +1,17 @@
 I. FILES LIST
 ------------
 
-account-settings.html           Landing page for user's account
-
-connection.php                  Connection to a MySQL database using the mysqli extension
-create-account.php              Registration form for web application
-dashboard.php                   Backend and session management for dashboard 
-deposit-data.php                Display the deposit history associated with a selected planner
-deposit-handler.php             Handles the retrieval and display of deposit history
-fetch_planner_data.php          Retrieves planner data, including the amount deposited, goal amount, progress etc.
-forgot-password.html            Help users regain access to their accounts when they forget their passwords   
-functions.php                   User authentication and data manipulation
-g-account-settings.js           Creates different functions for interactive account settings
-get-help.html                   Provides information or resources for users seeking assistance or support
+- account-settings.html           Landing page for user's account
+- connection.php                  Connection to a MySQL database using the mysqli extension
+- create-account.php              Registration form for web application
+- dashboard.php                   Backend and session management for dashboard 
+- deposit-data.php                Display the deposit history associated with a selected planner
+- deposit-handler.php             Handles the retrieval and display of deposit history
+- fetch_planner_data.php          Retrieves planner data, including the amount deposited, goal amount, progress etc.
+- forgot-password.html            Help users regain access to their accounts when they forget their passwords   
+- functions.php                   User authentication and data manipulation
+- g-account-settings.js           Creates different functions for interactive account settings
+- get-help.html                   Provides information or resources for users seeking assistance or support
 income-history.php              Fetches income data from the database for the currently logged-in user and displays it
 income-page.php                 It allows users to log their income and view their income history
 income-page-js.js               Contains navigation links and a form for adding new income entries
